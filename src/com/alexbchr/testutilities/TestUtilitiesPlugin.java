@@ -1,25 +1,51 @@
 package com.alexbchr.testutilities;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class TestUtilitiesPlugin extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.alexbchr.testutilities"; //$NON-NLS-1$
 
 	// The shared instance
-	private static Activator plugin;
+	private static TestUtilitiesPlugin plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public Activator() {
+	public TestUtilitiesPlugin() {
+		plugin = this;
 	}
+	
+	public static Shell getActiveWorkbenchShell() {
+ 		IWorkbenchWindow workBenchWindow= getActiveWorkbenchWindow();
+ 		if (workBenchWindow == null)
+ 			return null;
+ 		return workBenchWindow.getShell();
+ 	}
+	
+
+ 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
+ 		if (plugin == null)
+ 			return null;
+ 		IWorkbench workBench= plugin.getWorkbench();
+ 		if (workBench == null)
+ 			return null;
+ 			return workBench.getActiveWorkbenchWindow();
+ 	}
+ 	
+ 	public IWorkbench getWorkbench() {
+ 	    return PlatformUI.getWorkbench();
+ 	}
 
 	/*
 	 * (non-Javadoc)
@@ -44,7 +70,7 @@ public class Activator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static TestUtilitiesPlugin getDefault() {
 		return plugin;
 	}
 
