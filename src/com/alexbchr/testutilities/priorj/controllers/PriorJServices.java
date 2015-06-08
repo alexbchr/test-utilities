@@ -19,11 +19,11 @@ import technique.EmptySetOfTestCaseException;
 import technique.Technique;
 import technique.TechniqueCreator;
 
-import com.edu.ufcg.splab.priorj.controllers.PriorJServices;
-import com.edu.ufcg.splab.priorj.core.AJDTHandler;
-import com.edu.ufcg.splab.priorj.core.DifferenceVisitor;
-import com.edu.ufcg.splab.priorj.core.JUnitLaunch;
-import com.edu.ufcg.splab.priorj.core.JUnitReportFailures;
+import com.alexbchr.testutilities.priorj.controllers.PriorJServices;
+import com.alexbchr.testutilities.priorj.core.AJDTHandler;
+import com.alexbchr.testutilities.priorj.core.DifferenceVisitor;
+import com.alexbchr.testutilities.priorj.core.JUnitLaunch;
+import com.alexbchr.testutilities.priorj.core.JUnitReportFailures;
 import com.java.io.JavaIO;
 
 import controller.DataManager;

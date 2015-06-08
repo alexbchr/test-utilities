@@ -42,8 +42,8 @@ import org.osgi.framework.Bundle;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
-import com.edu.ufcg.splab.priorj.core.PriorJBuilder;
-import com.edu.ufcg.splab.priorj.core.ProjectVisitor;
+import com.alexbchr.testutilities.priorj.core.PriorJBuilder;
+import com.alexbchr.testutilities.priorj.core.ProjectVisitor;
 import com.java.io.JavaIO;
 
 /**

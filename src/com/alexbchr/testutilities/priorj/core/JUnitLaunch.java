@@ -37,7 +37,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.AbstractElementListSelectionDialog;
 
-import com.edu.ufcg.splab.priorj.PriorJPlugin;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 
 /**
  * Implementing a sample JUnit launch.
@@ -419,11 +419,11 @@ public class JUnitLaunch {
 	public static class JUnitPlugin {
 				
 		public static Shell getActiveWorkbenchShell() {
-	 		return PriorJPlugin.getActiveWorkbenchShell();
+	 		return TestUtilitiesPlugin.getActiveWorkbenchShell();
 	 	}
 		
 	 	public static IWorkbenchWindow getActiveWorkbenchWindow() {
-	 		return PriorJPlugin.getActiveWorkbenchWindow();
+	 		return TestUtilitiesPlugin.getActiveWorkbenchWindow();
 	 	}
 	 	
 	 	public IWorkbench getWorkbench() {

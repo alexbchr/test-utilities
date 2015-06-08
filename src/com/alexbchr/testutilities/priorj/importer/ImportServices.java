@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
-import com.edu.ufcg.splab.priorj.controllers.PriorJServices;
+import com.alexbchr.testutilities.priorj.controllers.PriorJServices;
 import com.java.io.JavaIO;
 
 /**
