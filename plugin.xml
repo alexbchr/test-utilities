@@ -58,5 +58,15 @@
          </toolbar>
       </menuContribution>
    </extension>
+   <extension
+         id="TestUtilitiesBuilder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            callOnEmptyDelta="false"
+            hasNature="false"
+            isConfigurable="false"
+            supportsConfigurations="false">
+      </builder>
+   </extension>
 
 </plugin>

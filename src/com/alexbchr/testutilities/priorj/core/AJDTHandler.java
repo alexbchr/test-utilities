@@ -10,6 +10,8 @@ import java.util.List;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 
+import org.eclipse.ajdt.core.AspectJPlugin;
+import org.eclipse.ajdt.internal.utils.AJDTUtils;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
