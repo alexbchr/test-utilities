@@ -30,7 +30,7 @@ public class ListenerContributorUtil {
     // profilerContributor extension point.
     IExtensionRegistry registry = Platform.getExtensionRegistry();
     IExtensionPoint extensionPoint = registry
-        .getExtensionPoint("org.testng.eclipse.reporterListenerContributorSchema");
+        .getExtensionPoint("com.alexbchr.testutilities.reporterListenerContributorSchema");
     IExtension extensions[] = extensionPoint.getExtensions();
 
     for (int i = 0; i < extensions.length; i++) {
@@ -65,7 +65,7 @@ public class ListenerContributorUtil {
     // profilerContributor extension point.
     IExtensionRegistry registry = Platform.getExtensionRegistry();
     IExtensionPoint extensionPoint = registry
-        .getExtensionPoint("org.testng.eclipse.testListenerContributorSchema");
+        .getExtensionPoint("com.alexbchr.testutilities.testListenerContributorSchema");
     IExtension extensions[] = extensionPoint.getExtensions();
 
     for (int i = 0; i < extensions.length; i++) {

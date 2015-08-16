@@ -12,7 +12,7 @@ import com.alexbchr.testutilities.TestUtilitiesPlugin;
 public abstract class TestNGLaunchConfigurationConstants {
   public static final String JDK15_COMPLIANCE = "JDK";
   
-  public static final String ID_TESTNG_APPLICATION = "org.testng.eclipse.launchconfig"; //$NON-NLS-1$
+  public static final String ID_TESTNG_APPLICATION = "com.alexbchr.testutilities.testng.launchconfig"; //$NON-NLS-1$
   
   private static String make(String s) {
     return TestUtilitiesPlugin.PLUGIN_ID + "." + s;

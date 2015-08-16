@@ -6,7 +6,7 @@ import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import java.util.Map;
 
 public class ConvertFromJUnitRefactoringContribution extends RefactoringContribution {
-  public static final String REFACTORING_ID = "org.testng.eclipse.refactoring.convertfromjunit3";
+  public static final String REFACTORING_ID = "com.alexbchr.testutilities.testng.refactoring.convertfromjunit3";
 
   @Override
   public RefactoringDescriptor createDescriptor(String id, String project,

@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Testutilities
+Bundle-Name: %pluginName
 Bundle-SymbolicName: com.alexbchr.testutilities;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.alexbchr.testutilities.TestUtilitiesPlugin
-Bundle-Vendor: ALEXBCHR
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.expressions,
@@ -39,10 +40,30 @@ Bundle-ClassPath: .,
  lib/guava-base-r03.jar,
  lib/guava-collections-r03.jar,
  lib/testng.jar,
- lib/testng-sources.jar
+ lib/testng-sources.jar,
+ lib/jcommander.jar,
+ lib/snakeyaml.jar,
+ lib/bsh-2.0b4.jar
 Export-Package: com.alexbchr.testutilities,
  com.alexbchr.testutilities.handlers,
  com.alexbchr.testutilities.priorj.controllers,
  com.alexbchr.testutilities.priorj.core,
  com.alexbchr.testutilities.priorj.importer,
- com.alexbchr.testutilities.priorj.models
+ com.alexbchr.testutilities.priorj.models,
+ com.alexbchr.testutilities.testng,
+ com.alexbchr.testutilities.testng.buildpath,
+ com.alexbchr.testutilities.testng.launch,
+ com.alexbchr.testutilities.testng.launch.components,
+ com.alexbchr.testutilities.testng.launch.tester,
+ com.alexbchr.testutilities.testng.refactoring,
+ com.alexbchr.testutilities.testng.ui,
+ com.alexbchr.testutilities.testng.ui.buildpath,
+ com.alexbchr.testutilities.testng.ui.conversion,
+ com.alexbchr.testutilities.testng.ui.preferences,
+ com.alexbchr.testutilities.testng.ui.summary,
+ com.alexbchr.testutilities.testng.ui.tree,
+ com.alexbchr.testutilities.testng.ui.util,
+ com.alexbchr.testutilities.testng.util,
+ com.alexbchr.testutilities.testng.util.param,
+ com.alexbchr.testutilities.testng.util.signature,
+ com.alexbchr.testutilities.testng.wizards
