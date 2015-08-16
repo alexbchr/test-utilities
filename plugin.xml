@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-
+	<!-- START JUnit -->
+	<extension
+         point="org.eclipse.ui.newWizards">
+      <category
+      		id="com.alexbchr.testutilities.ui.TestWizardCategory"
+      		name="%WizardCategory.name">
+      </category>
+      <wizard
+            name="%TestCaseWizard.name"
+            icon="$nl$/icons/wizard/new_testcase.gif"
+            category="com.alexbchr.testutilities.ui.TestWizardCategory"
+            id="com.alexbchr.testutilities.wizards.NewTestCaseCreationWizard">
+         <class
+               class="org.eclipse.jdt.internal.junit.wizards.NewTestCaseCreationWizard">
+            <parameter
+                  name="javatype"
+                  value="true">
+            </parameter>
+         </class>
+         <description>
+            %TestWizard.description
+         </description>
+         <keywordReference id="org.eclipse.jdt.junit.wizards.java"/>
+      </wizard>
+      <wizard
+            name="%TestSuiteWizard.name"
+            icon="$nl$/icons/full/etool16/new_testsuite.gif"
+            category="org.eclipse.jdt.ui.java/org.eclipse.jdt.junit"
+            class="org.eclipse.jdt.internal.junit.wizards.NewTestSuiteCreationWizard"
+            id="org.eclipse.jdt.junit.wizards.NewTestSuiteCreationWizard">
+         <description>
+            %SuiteWizard.description
+         </description>
+         <keywordReference id="org.eclipse.jdt.junit.wizards.java"/>
+      </wizard>
+   </extension>
+   <!-- END JUnit -->
    <extension
          point="org.eclipse.ui.commands">
       <!--<category

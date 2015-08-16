@@ -1,8 +1,11 @@
 package com.alexbchr.testutilities;
 
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -73,6 +76,13 @@ public class TestUtilitiesPlugin extends AbstractUIPlugin {
 	public static TestUtilitiesPlugin getDefault() {
 		return plugin;
 	}
+	
+	public static IWorkbenchPage getActivePage() {
+		IWorkbenchWindow activeWorkbenchWindow= getActiveWorkbenchWindow();
+		if (activeWorkbenchWindow == null)
+			return null;
+		return activeWorkbenchWindow.getActivePage();
+	}
 
 	/**
 	 * Returns an image descriptor for the image file at the given
@@ -83,5 +93,17 @@ public class TestUtilitiesPlugin extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
+	public static String getPluginId() {
+		return PLUGIN_ID;
+	}
+	
+	public static void log(Throwable e) {
+		log(new Status(IStatus.ERROR, getPluginId(), IStatus.ERROR, "Error", e)); //$NON-NLS-1$
+	}
+
+	public static void log(IStatus status) {
+		getDefault().getLog().log(status);
 	}
 }
