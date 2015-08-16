@@ -1,7 +1,7 @@
 package com.alexbchr.testutilities.testng.ui.summary;
 
 import org.eclipse.jface.viewers.Viewer;
-import org.testng.eclipse.ui.RunInfo;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
 
 /**
  * A viewer filter that uses a string to perform its filterin.

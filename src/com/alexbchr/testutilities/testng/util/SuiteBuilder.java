@@ -12,10 +12,10 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
-import org.testng.eclipse.launch.components.ITestContent;
-import org.testng.eclipse.ui.util.TypeParser;
-import org.testng.eclipse.util.signature.IMethodDescriptor;
-import org.testng.eclipse.util.signature.MethodDescriptor;
+import com.alexbchr.testutilities.testng.launch.components.ITestContent;
+import com.alexbchr.testutilities.testng.ui.util.TypeParser;
+import com.alexbchr.testutilities.testng.util.signature.IMethodDescriptor;
+import com.alexbchr.testutilities.testng.util.signature.MethodDescriptor;
 import org.testng.reporters.XMLStringBuffer;
 import org.testng.xml.Parser;
 

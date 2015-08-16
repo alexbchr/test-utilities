@@ -4,8 +4,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.testng.ITestResult;
-import org.testng.eclipse.ui.ImagesUtil;
-import org.testng.eclipse.ui.RunInfo;
+import com.alexbchr.testutilities.testng.ui.ImagesUtil;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
 
 abstract public class BaseTreeItem implements ITreeItem {
   private static final String DATA_TREE_ITEM = "treeItem";

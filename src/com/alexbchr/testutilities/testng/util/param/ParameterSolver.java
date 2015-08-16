@@ -31,8 +31,8 @@ import org.eclipse.search.ui.text.FileTextSearchScope;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.ui.util.SuiteListSelectionDialog;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.ui.util.SuiteListSelectionDialog;
 import org.testng.xml.Parser;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
@@ -67,7 +67,7 @@ public class ParameterSolver {
       return findParameterValues(javaElements[0].getAncestor(IJavaElement.JAVA_PROJECT).getCorrespondingResource(), paramNames);
     }
     catch(JavaModelException jmex) {
-      TestNGPlugin.log(jmex);
+      TestUtilitiesPlugin.log(jmex);
     }
     
     return paramNames;
@@ -172,7 +172,7 @@ public class ParameterSolver {
           spf = (SAXParserFactory) cl.newInstance();
         }
         catch(Exception ex2) {
-          TestNGPlugin.log(ex2);
+          TestUtilitiesPlugin.log(ex2);
         }
       }
       
@@ -185,16 +185,16 @@ public class ParameterSolver {
       saxParser.parse(is, pvch);
     }
     catch(CoreException cex) {
-      TestNGPlugin.log(cex);
+      TestUtilitiesPlugin.log(cex);
     }
     catch(ParserConfigurationException pcex) {
-      TestNGPlugin.log(pcex);
+      TestUtilitiesPlugin.log(pcex);
     }
     catch(SAXException saxex) {
-      TestNGPlugin.log(saxex);
+      TestUtilitiesPlugin.log(saxex);
     }
     catch(IOException ioex) {
-      TestNGPlugin.log(ioex);
+      TestUtilitiesPlugin.log(ioex);
     }
     
     return parameters;

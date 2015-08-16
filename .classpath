@@ -6,5 +6,15 @@
 	<classpathentry kind="lib" path="lib/coverage-v1.0.6.jar"/>
 	<classpathentry kind="lib" path="lib/zip4j_1.3.2.jar"/>
 	<classpathentry kind="lib" path="lib/priorj-v1.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/bsh-2.0b4.jar"/>
+	<classpathentry kind="lib" path="lib/guava-base-r03.jar"/>
+	<classpathentry kind="lib" path="lib/guava-collections-r03.jar"/>
+	<classpathentry kind="lib" path="lib/jcommander.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/snakeyaml.jar"/>
+	<classpathentry kind="lib" path="lib/testng-sources.jar"/>
+	<classpathentry kind="lib" path="lib/testng.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.ajdt.core_2.2.4.e44x-20150610-1600.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.ajdt.ui_2.2.4.e44x-20150610-1600.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

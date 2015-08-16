@@ -12,11 +12,11 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.action.Action;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.ui.util.ConfigurationHelper;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.LaunchUtil;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.ui.util.ConfigurationHelper;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.LaunchUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 
 /**
@@ -43,16 +43,16 @@ public class QuickRunAction extends Action {
     if(ILaunchManager.RUN_MODE.equals(m_runMode)) {
       setText(ResourceUtil.getString("QuickRunAction.run.action.label")); //$NON-NLS-1$
       setToolTipText(ResourceUtil.getString("QuickRunAction.run.action.tooltip")); //$NON-NLS-1$
-      setDisabledImageDescriptor(TestNGPlugin.getImageDescriptor("dlcl16/relaunch.gif")); //$NON-NLS-1$
-      setHoverImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
-      setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
+      setDisabledImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("dlcl16/relaunch.gif")); //$NON-NLS-1$
+      setHoverImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
+      setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
     }
     else {
       setText(ResourceUtil.getString("QuickRunAction.debug.action.label")); //$NON-NLS-1$
       setToolTipText(ResourceUtil.getString("QuickRunAction.debug.action.tooltip")); //$NON-NLS-1$
-      setDisabledImageDescriptor(TestNGPlugin.getImageDescriptor("dlcl16/debug.gif")); //$NON-NLS-1$
-      setHoverImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/debug.gif")); //$NON-NLS-1$
-      setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/debug.gif")); //$NON-NLS-1$
+      setDisabledImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("dlcl16/debug.gif")); //$NON-NLS-1$
+      setHoverImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/debug.gif")); //$NON-NLS-1$
+      setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/debug.gif")); //$NON-NLS-1$
     }
   }
   
@@ -63,7 +63,7 @@ public class QuickRunAction extends Action {
       imethod= (IMethod) JDTUtil.findElement(m_javaProject, m_runInfo); 
     }
     catch(JavaModelException jmex) {
-      TestNGPlugin.log(new Status(IStatus.ERROR, TestNGPlugin.PLUGIN_ID, 3333, 
+    	TestUtilitiesPlugin.log(new Status(IStatus.ERROR, TestUtilitiesPlugin.PLUGIN_ID, 3333, 
           "Cannot find method " + m_runInfo.getMethodDisplay() + " in class " + m_runInfo.getClassName(), //$NON-NLS-1$ $NON-NLS-2$
           jmex));
     }
@@ -81,7 +81,7 @@ public class QuickRunAction extends Action {
       m_runInfo.setEnvironmentVariables(config.getAttribute(
           ILaunchManager.ATTR_ENVIRONMENT_VARIABLES, (Map<String, String>) null));
     } catch (CoreException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     LaunchUtil.launchMethodConfiguration(m_javaProject, 
         imethod, 

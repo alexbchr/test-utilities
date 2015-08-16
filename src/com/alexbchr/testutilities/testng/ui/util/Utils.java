@@ -20,8 +20,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.SWTUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.SWTUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

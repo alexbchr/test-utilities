@@ -23,8 +23,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.buildpath.BuildPathSupport;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.buildpath.BuildPathSupport;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 public class TestNGAddLibraryProposal implements IJavaCompletionProposal {
 

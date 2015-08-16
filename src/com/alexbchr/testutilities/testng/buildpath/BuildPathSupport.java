@@ -15,13 +15,13 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.osgi.framework.Bundle;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 public class BuildPathSupport {
 
   private static IPath getBundleLocation() {
-    Bundle bundle = TestNGPlugin.getDefault().getBundle();
+    Bundle bundle = TestUtilitiesPlugin.getDefault().getBundle();
     if (bundle == null) {
       return null;
     }

@@ -9,9 +9,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.buildpath.TestNGContainerInitializer;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.buildpath.TestNGContainerInitializer;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 public class TestNGContainerWizardPage extends WizardPage implements IClasspathContainerPage {
 
@@ -19,7 +19,7 @@ public class TestNGContainerWizardPage extends WizardPage implements IClasspathC
     super("TestNGContainerWizardPage"); //$NON-NLS-1$
     setTitle(ResourceUtil.getString("TestNGContainerWizardPage.title"));  //$NON-NLS-1$
     setDescription(ResourceUtil.getString("TestNGContainerWizardPage.description")); //$NON-NLS-1$
-    setImageDescriptor(TestNGPlugin.getImageDescriptor("wizban/addlibrary_wiz.png")); //$NON-NLS-1$
+    setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("wizban/addlibrary_wiz.png")); //$NON-NLS-1$
   }
 
   public void createControl(Composite parent) {

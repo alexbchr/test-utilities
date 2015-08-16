@@ -60,8 +60,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 /**
  * Small modifications to fit TestNG.
@@ -105,7 +105,7 @@ public class CompareResultDialog extends Dialog {
     fTestName = failure.getMethodName();
     initializeActualExpected(failure.getStackTrace());
     computePrefixSuffix();
-    fSettings = TestNGPlugin.getDefault().getDialogSettings();
+    fSettings = TestUtilitiesPlugin.getDefault().getDialogSettings();
   }
 
   // TESTNG-21

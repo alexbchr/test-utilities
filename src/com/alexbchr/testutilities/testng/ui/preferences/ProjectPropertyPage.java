@@ -37,13 +37,13 @@ import org.eclipse.ui.dialogs.ISelectionStatusValidator;
 import org.eclipse.ui.dialogs.PropertyPage;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.views.navigator.ResourceSorter;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.ui.util.Utils;
-import org.testng.eclipse.ui.util.Utils.Widgets;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.PreferenceStoreUtil;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.SWTUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.ui.util.Utils;
+import com.alexbchr.testutilities.testng.ui.util.Utils.Widgets;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.SWTUtil;
 import org.testng.reporters.XMLReporter;
 
 /**
@@ -196,7 +196,7 @@ public class ProjectPropertyPage extends PropertyPage {
     m_workingProject = (IProject) getElement().getAdapter(IProject.class);
 
     // Populate the owner text field with the default value
-    PreferenceStoreUtil storage= TestNGPlugin.getPluginPreferenceStore();
+    PreferenceStoreUtil storage= TestUtilitiesPlugin.getPluginPreferenceStore();
     String projectName = m_workingProject.getName();
     m_outputdir.setText(storage.getOutputDir(projectName, true));
     m_absolutePath.setSelection(storage.isOutputAbsolutePath(projectName, true));
@@ -215,7 +215,7 @@ public class ProjectPropertyPage extends PropertyPage {
   }
 
   public boolean performOk() {
-    PreferenceStoreUtil storage= TestNGPlugin.getPluginPreferenceStore();
+    PreferenceStoreUtil storage= TestUtilitiesPlugin.getPluginPreferenceStore();
     String projectName = m_workingProject.getName();
     storage.storeOutputDir(projectName, m_outputdir.getText(), m_absolutePath.getSelection());
     storage.storeDisabledListeners(projectName, m_disabledDefaultListeners.getSelection());

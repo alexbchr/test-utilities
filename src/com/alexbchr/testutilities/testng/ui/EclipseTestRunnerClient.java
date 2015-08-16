@@ -2,7 +2,7 @@ package com.alexbchr.testutilities.testng.ui;
 
 import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.core.runtime.Platform;
-import org.testng.eclipse.TestNGPlugin;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 import org.testng.remote.strprotocol.AbstractRemoteTestRunnerClient;
 import org.testng.remote.strprotocol.GenericMessage;
 import org.testng.remote.strprotocol.IMessageSender;
@@ -55,7 +55,7 @@ public class EclipseTestRunnerClient extends AbstractRemoteTestRunnerClient {
     ServerConnection srvConnection= new ServerConnection(messageMarshaller) {
       @Override
       protected void handleThrowable(Throwable cause) {
-        TestNGPlugin.log(cause);
+    	  TestUtilitiesPlugin.log(cause);
       };
     };
     
@@ -142,7 +142,7 @@ public class EclipseTestRunnerClient extends AbstractRemoteTestRunnerClient {
 
   static abstract class ListenerSafeRunnable implements ISafeRunnable {
     public void handleException(Throwable exception) {
-      TestNGPlugin.log(exception);
+    	TestUtilitiesPlugin.log(exception);
     }
   }
 }

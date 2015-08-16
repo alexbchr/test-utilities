@@ -17,9 +17,9 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ui.IWorkbenchPage;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.Utils;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.Utils;
 
 /**
  * A composite change that gathers all the changes needs to convert the current
@@ -50,7 +50,7 @@ public class ConvertFromJUnitCompositeChange extends CompositeChange {
   }
 
   private void computeChanges() {
-    TestNGPlugin.asyncExec(new Runnable() {
+    TestUtilitiesPlugin.asyncExec(new Runnable() {
       public void run() {
         IJavaProject javaProject = JDTUtil.getJavaProjectContext();
         if (javaProject == null) return;

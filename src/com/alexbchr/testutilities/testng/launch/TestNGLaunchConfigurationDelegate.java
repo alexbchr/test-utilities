@@ -26,16 +26,16 @@ import org.eclipse.jdt.launching.VMRunnerConfiguration;
 import org.osgi.framework.Version;
 import org.testng.CommandLineArgs;
 import org.testng.ITestNGListener;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
-import org.testng.eclipse.buildpath.BuildPathSupport;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.LaunchType;
-import org.testng.eclipse.ui.util.ConfigurationHelper;
-import org.testng.eclipse.util.LaunchUtil;
-import org.testng.eclipse.util.ListenerContributorUtil;
-import org.testng.eclipse.util.PreferenceStoreUtil;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.StringUtils;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
+import com.alexbchr.testutilities.testng.buildpath.BuildPathSupport;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.LaunchType;
+import com.alexbchr.testutilities.testng.ui.util.ConfigurationHelper;
+import com.alexbchr.testutilities.testng.util.LaunchUtil;
+import com.alexbchr.testutilities.testng.util.ListenerContributorUtil;
+import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.StringUtils;
 import org.testng.remote.RemoteArgs;
 import org.testng.remote.RemoteTestNG;
 import org.testng.xml.LaunchSuite;
@@ -83,7 +83,7 @@ public class TestNGLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
     for (String arg : runConfig.getProgramArguments()) {
       sb.append(arg).append(" ");
     }
-    TestNGPlugin.log("[TestNGLaunchConfigurationDelegate] " + debugConfig(runConfig));
+    TestUtilitiesPlugin.log("[TestNGLaunchConfigurationDelegate] " + debugConfig(runConfig));
     runner.run(runConfig, launch, monitor);
   }
 
@@ -118,7 +118,7 @@ public class TestNGLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
   }
 
   private static void p(String s) {
-    if (TestNGPlugin.isVerbose()) {
+    if (TestUtilitiesPlugin.isVerbose()) {
       System.out.println("[TestNGLaunchConfigurationDelegate] " + s);
     }
   }
@@ -187,7 +187,7 @@ public class TestNGLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
   @Override
   public String getMainTypeName(ILaunchConfiguration configuration)
       throws CoreException {
-    return TestNGPlugin.isDebug() ? EmptyRemoteTestNG.class.getName()
+    return TestUtilitiesPlugin.isDebug() ? EmptyRemoteTestNG.class.getName()
         : RemoteTestNG.class.getName();
   }
 
@@ -238,7 +238,7 @@ public class TestNGLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
 //    }
 
     
-    PreferenceStoreUtil storage = TestNGPlugin.getPluginPreferenceStore();
+    PreferenceStoreUtil storage = TestUtilitiesPlugin.getPluginPreferenceStore();
     argv.add(CommandLineArgs.OUTPUT_DIRECTORY);
     argv.add(storage.getOutputAbsolutePath(jproject).toOSString());
 
@@ -298,8 +298,8 @@ public class TestNGLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
     List<String> tempSuites = new ArrayList<String>();
 
     // Regular mode: generate a new random suite path
-    File suiteDir = TestNGPlugin.isDebug() ? new File(RemoteTestNG.DEBUG_SUITE_DIRECTORY)
-        : TestNGPlugin.getPluginPreferenceStore().getTemporaryDirectory();
+    File suiteDir = TestUtilitiesPlugin.isDebug() ? new File(RemoteTestNG.DEBUG_SUITE_DIRECTORY)
+        : TestUtilitiesPlugin.getPluginPreferenceStore().getTemporaryDirectory();
     for (LaunchSuite launchSuite : launchSuiteList) {
       File suiteFile = launchSuite.save(suiteDir);
 
@@ -331,7 +331,7 @@ public class TestNGLaunchConfigurationDelegate extends AbstractJavaLaunchConfigu
     String[] originalClasspath = super.getClasspath(configuration);
 
     String projectName = getJavaProjectName(configuration);
-    boolean useProjectJar = TestNGPlugin.getPluginPreferenceStore().getUseProjectJar(projectName);
+    boolean useProjectJar = TestUtilitiesPlugin.getPluginPreferenceStore().getUseProjectJar(projectName);
     if (useProjectJar) {
       return originalClasspath;
     }

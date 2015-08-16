@@ -14,7 +14,7 @@ import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.MethodInvocation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.testng.collections.Maps;
-import org.testng.eclipse.ui.conversion.Visitor;
+import com.alexbchr.testutilities.testng.ui.conversion.Visitor;
 
 /**
  * The visitor for a TestNG class.

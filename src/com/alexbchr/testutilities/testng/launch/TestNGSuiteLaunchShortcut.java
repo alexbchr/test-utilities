@@ -6,7 +6,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.testng.eclipse.util.LaunchUtil;
+import com.alexbchr.testutilities.testng.util.LaunchUtil;
 
 /**
  * Suite contextual launcher.

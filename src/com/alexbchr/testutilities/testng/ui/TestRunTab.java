@@ -3,7 +3,7 @@ package com.alexbchr.testutilities.testng.ui;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IMemento;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 import java.util.List;
 

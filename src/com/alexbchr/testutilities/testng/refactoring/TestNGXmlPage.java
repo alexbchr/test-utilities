@@ -27,11 +27,11 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.PreferenceStoreUtil.SuiteMethodTreatment;
-import org.testng.eclipse.util.SWTUtil;
-import org.testng.eclipse.util.Utils;
-import org.testng.eclipse.util.Utils.JavaElement;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil.SuiteMethodTreatment;
+import com.alexbchr.testutilities.testng.util.SWTUtil;
+import com.alexbchr.testutilities.testng.util.Utils;
+import com.alexbchr.testutilities.testng.util.Utils.JavaElement;
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlPackage;
 import org.testng.xml.XmlSuite;
@@ -277,12 +277,12 @@ public class TestNGXmlPage extends UserInputWizardPage {
       m_suiteMethodCombo.add("Remove");
       m_suiteMethodCombo.add("Comment out");
       m_suiteMethodCombo.add("Don't touch");
-      SuiteMethodTreatment lastValue = TestNGPlugin.getPluginPreferenceStore().getSuiteMethodTreatement();
+      SuiteMethodTreatment lastValue = TestUtilitiesPlugin.getPluginPreferenceStore().getSuiteMethodTreatement();
       m_suiteMethodCombo.select(lastValue.ordinal());
       m_suiteMethodCombo.addSelectionListener(new SelectionListener() {
 
         public void widgetSelected(SelectionEvent e) {
-          TestNGPlugin.getPluginPreferenceStore().storeSuiteMethodTreatement(
+        	TestUtilitiesPlugin.getPluginPreferenceStore().storeSuiteMethodTreatement(
               m_suiteMethodCombo.getSelectionIndex());
         }
 
@@ -390,7 +390,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
     IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
     ByteArrayInputStream is = new ByteArrayInputStream(m_xmlSuite.toXml().getBytes());
     try {
-      org.testng.eclipse.ui.util.Utils.createFileWithDialog(
+      com.alexbchr.testutilities.testng.ui.util.Utils.createFileWithDialog(
           PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(),
               file, is);
     } catch (CoreException e) {

@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.SelectionStatusDialog;
 import org.eclipse.ui.internal.misc.StringMatcher;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 import com.google.common.collect.Lists;
 

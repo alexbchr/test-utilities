@@ -23,12 +23,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.SelectionDialog;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.SWTUtil;
-import org.testng.eclipse.util.StringUtils;
-import org.testng.eclipse.util.Utils;
-import org.testng.eclipse.util.Utils.JavaElement;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.SWTUtil;
+import com.alexbchr.testutilities.testng.util.StringUtils;
+import com.alexbchr.testutilities.testng.util.Utils;
+import com.alexbchr.testutilities.testng.util.Utils.JavaElement;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.alexbchr.testutilities.testng.launch.components;
 
 import org.eclipse.jdt.core.IMethod;
-import org.testng.eclipse.util.signature.IMethodDescriptor;
+import com.alexbchr.testutilities.testng.util.signature.IMethodDescriptor;
 
 import java.util.Collection;
 import java.util.Set;

@@ -23,14 +23,14 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.LaunchType;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.Protocols;
-import org.testng.eclipse.ui.RunInfo;
-import org.testng.eclipse.util.StringUtils;
-import org.testng.eclipse.util.SuiteGenerator;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.LaunchType;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.Protocols;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
+import com.alexbchr.testutilities.testng.util.StringUtils;
+import com.alexbchr.testutilities.testng.util.SuiteGenerator;
 import org.testng.remote.RemoteTestNG;
 import org.testng.xml.LaunchSuite;
 
@@ -160,7 +160,7 @@ public class ConfigurationHelper {
 //  }
   
   private static String getProjectJvmArgs() {
-    IPreferenceStore store = TestNGPlugin.getDefault().getPreferenceStore();
+    IPreferenceStore store = TestUtilitiesPlugin.getDefault().getPreferenceStore();
     String result = store.getString(TestNGPluginConstants.S_JVM_ARGS);
     return result;
   }
@@ -178,7 +178,7 @@ public class ConfigurationHelper {
   			    result);
   			result = VariablesPlugin.getDefault().getStringVariableManager().performStringSubstitution(result);
   		} catch (CoreException e) {
-  			TestNGPlugin.log(e);
+  			TestUtilitiesPlugin.log(e);
   		}
     }
 
@@ -223,7 +223,7 @@ public class ConfigurationHelper {
       result = config.getAttribute(attr, result);
     }
     catch(CoreException cex) {
-      TestNGPlugin.log(cex);
+    	TestUtilitiesPlugin.log(cex);
     }
     
     return result;
@@ -236,7 +236,7 @@ public class ConfigurationHelper {
       result = config.getAttribute(attr, result);
     }
     catch (CoreException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     
     return result;
@@ -250,7 +250,7 @@ public class ConfigurationHelper {
       result = config.getAttribute(attr, result);
     }
     catch (CoreException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     
     return result;
@@ -264,7 +264,7 @@ public class ConfigurationHelper {
       result = config.getAttribute(attr, result);
     }
     catch (CoreException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     
     return result;
@@ -277,7 +277,7 @@ public class ConfigurationHelper {
       result = config.getAttribute(attr, result);
     }
     catch (CoreException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     
     return result;
@@ -297,7 +297,7 @@ public class ConfigurationHelper {
                          project.getName());
     }
     catch(CoreException ce) {
-      TestNGPlugin.log(ce);
+    	TestUtilitiesPlugin.log(ce);
     }
     
     return wConf;

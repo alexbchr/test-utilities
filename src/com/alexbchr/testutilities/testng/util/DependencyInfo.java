@@ -18,7 +18,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.launch.components.Filters;
+import com.alexbchr.testutilities.testng.launch.components.Filters;
 
 /**
  * A class that represents all the information about groups in the current project

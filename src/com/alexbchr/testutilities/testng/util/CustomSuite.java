@@ -19,7 +19,7 @@ import java.util.Properties;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.testng.TestNGException;
-import org.testng.eclipse.TestNGPlugin;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 import org.testng.internal.Utils;
 import org.testng.remote.RemoteTestNG;
 import org.testng.reporters.XMLStringBuffer;
@@ -99,7 +99,7 @@ abstract public class CustomSuite extends LaunchSuite {
 
   protected XMLStringBuffer createContentBuffer() {
     PreferenceStoreUtil storage =
-        new PreferenceStoreUtil(TestNGPlugin.getDefault().getPreferenceStore());
+        new PreferenceStoreUtil(TestUtilitiesPlugin.getDefault().getPreferenceStore());
     String xmlFile = storage.getXmlTemplateFile(m_projectName, false /* not only project */);
     boolean hasEclipseXmlFile = !Utils.isStringEmpty(xmlFile);
     XMLStringBuffer suiteBuffer = new XMLStringBuffer(); //$NON-NLS-1$
@@ -264,14 +264,14 @@ abstract public class CustomSuite extends LaunchSuite {
       osw = new OutputStreamWriter(bufferedOutputStream, Charset.forName("UTF-8"));
       osw.write(content.getStringBuffer().toString());
     } catch (IOException ioException) {
-      TestNGPlugin.log(ioException);
+    	TestUtilitiesPlugin.log(ioException);
     } finally {
         try {
             if (osw != null) osw.close();
             if (bufferedOutputStream != null) bufferedOutputStream.close();
             if (fileOutputStream != null) fileOutputStream.close();
         } catch (Exception e) {
-          TestNGPlugin.log(e);
+        	TestUtilitiesPlugin.log(e);
         }
     }
   }

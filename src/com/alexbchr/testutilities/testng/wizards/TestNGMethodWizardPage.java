@@ -20,8 +20,8 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.Utils.JavaElement;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.Utils.JavaElement;
 
 /**
  * A wizard page that displays the list of public methods on the currently selected class

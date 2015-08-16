@@ -19,7 +19,7 @@ import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 /**
  * Abstract Action for opening a Java editor.

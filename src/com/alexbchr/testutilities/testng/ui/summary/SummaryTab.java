@@ -34,10 +34,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.testng.eclipse.ui.OpenTestAction;
-import org.testng.eclipse.ui.RunInfo;
-import org.testng.eclipse.ui.TestRunTab;
-import org.testng.eclipse.ui.TestRunnerViewPart;
+import com.alexbchr.testutilities.testng.ui.OpenTestAction;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
+import com.alexbchr.testutilities.testng.ui.TestRunTab;
+import com.alexbchr.testutilities.testng.ui.TestRunnerViewPart;
 import org.testng.remote.strprotocol.SuiteMessage;
 
 /**

@@ -14,15 +14,15 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.swt.widgets.Composite;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.LaunchType;
-import org.testng.eclipse.launch.components.Filters;
-import org.testng.eclipse.launch.components.ITestContent;
-import org.testng.eclipse.ui.util.ConfigurationHelper;
-import org.testng.eclipse.ui.util.TypeParser;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.StringUtils;
-import org.testng.eclipse.util.TestSearchEngine;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.LaunchType;
+import com.alexbchr.testutilities.testng.launch.components.Filters;
+import com.alexbchr.testutilities.testng.launch.components.ITestContent;
+import com.alexbchr.testutilities.testng.ui.util.ConfigurationHelper;
+import com.alexbchr.testutilities.testng.ui.util.TypeParser;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.StringUtils;
+import com.alexbchr.testutilities.testng.util.TestSearchEngine;
 
 public class GroupSelector extends MultiSelector {
 
@@ -82,10 +82,10 @@ public class GroupSelector extends MultiSelector {
       }
     }
     catch(InvocationTargetException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     catch(InterruptedException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
 
     m_groupMap = result;

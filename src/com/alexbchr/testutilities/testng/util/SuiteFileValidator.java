@@ -3,7 +3,6 @@ package com.alexbchr.testutilities.testng.util;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.testng.collections.Maps;
-import org.testng.eclipse.TestNGPlugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,6 +20,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 
 public class SuiteFileValidator {
   private static final SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
@@ -76,7 +77,7 @@ public class SuiteFileValidator {
       }
     }
     catch (IOException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     finally {
       try {
@@ -100,10 +101,10 @@ public class SuiteFileValidator {
         SAXPARSER = SAX_FACTORY.newSAXParser();
       }
       catch(ParserConfigurationException pce) {
-        TestNGPlugin.log(pce);
+    	  TestUtilitiesPlugin.log(pce);
       }
       catch(SAXException saxe) {
-        TestNGPlugin.log(saxe);
+    	  TestUtilitiesPlugin.log(saxe);
       }
     }
     

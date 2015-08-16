@@ -10,12 +10,12 @@
  *******************************************************************************/
 package com.alexbchr.testutilities.testng.ui;
 
-import static org.testng.eclipse.ui.Images.IMG_COMPARE;
-import static org.testng.eclipse.ui.Images.IMG_COMPARE_DISABLED;
-import static org.testng.eclipse.ui.Images.IMG_COMPARE_HOVER;
+import static com.alexbchr.testutilities.testng.ui.Images.IMG_COMPARE;
+import static com.alexbchr.testutilities.testng.ui.Images.IMG_COMPARE_DISABLED;
+import static com.alexbchr.testutilities.testng.ui.Images.IMG_COMPARE_HOVER;
 
 import org.eclipse.jface.action.Action;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 /**
  * Action to enable/disable stack trace filtering.

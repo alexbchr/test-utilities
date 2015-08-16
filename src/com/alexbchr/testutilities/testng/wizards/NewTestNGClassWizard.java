@@ -23,10 +23,10 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.testng.eclipse.ui.util.Utils;
-import org.testng.eclipse.util.StringUtils;
-import org.testng.eclipse.util.SuiteGenerator;
-import org.testng.eclipse.util.Utils.JavaElement;
+import com.alexbchr.testutilities.testng.ui.util.Utils;
+import com.alexbchr.testutilities.testng.util.StringUtils;
+import com.alexbchr.testutilities.testng.util.SuiteGenerator;
+import com.alexbchr.testutilities.testng.util.Utils.JavaElement;
 
 /**
  * The wizard that creates a new TestNG class. This wizard looks at the current
@@ -59,7 +59,7 @@ public class NewTestNGClassWizard extends Wizard implements INewWizard {
 	 */
 	@Override
   public void addPages() {
-    List<JavaElement> elements = org.testng.eclipse.util.Utils.getSelectedJavaElements();
+    List<JavaElement> elements = com.alexbchr.testutilities.testng.util.Utils.getSelectedJavaElements();
 		if (hasAtLeastOneMethod(elements)) {
 		  m_methodPage = new TestNGMethodWizardPage(elements);
 		  addPage(m_methodPage);
@@ -125,7 +125,7 @@ public class NewTestNGClassWizard extends Wizard implements INewWizard {
 	  //
 	  if (!StringUtils.isEmptyString(xmlPath)) {
 	    IFile file = createFile(containerName, "", xmlPath, createXmlContentStream(), monitor);
-	    if (file != null) org.testng.eclipse.util.Utils.openFile(getShell(), file, monitor);
+	    if (file != null) com.alexbchr.testutilities.testng.util.Utils.openFile(getShell(), file, monitor);
 	    else result = false;
 	  }
 
@@ -135,7 +135,7 @@ public class NewTestNGClassWizard extends Wizard implements INewWizard {
 	  if (result) {
   	  IFile file = createFile(containerName, packageName, className + ".java",
           createJavaContentStream(className, methods), monitor);
-  	  if (file != null) org.testng.eclipse.util.Utils.openFile(getShell(), file, monitor);
+  	  if (file != null) com.alexbchr.testutilities.testng.util.Utils.openFile(getShell(), file, monitor);
   	  else result = false;
 	  }
 

@@ -15,8 +15,8 @@ import org.eclipse.jdt.ui.text.java.IInvocationContext;
 import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
 import org.eclipse.jdt.ui.text.java.IProblemLocation;
 import org.eclipse.jdt.ui.text.java.IQuickFixProcessor;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.buildpath.BuildPathSupport;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.buildpath.BuildPathSupport;
 
 public class TestNGQuickFixProcessor implements IQuickFixProcessor {
 
@@ -81,7 +81,7 @@ public class TestNGQuickFixProcessor implements IQuickFixProcessor {
       }
     }
     catch (JavaModelException e) {
-      TestNGPlugin.log(e.getStatus());
+    	TestUtilitiesPlugin.log(e.getStatus());
     }
 
     return proposals;

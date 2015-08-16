@@ -33,8 +33,8 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.TypeLiteral;
 import org.eclipse.jdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.PreferenceStoreUtil.SuiteMethodTreatment;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil.SuiteMethodTreatment;
 
 /**
  * A rewriter that will convert the current JUnit file to TestNG
@@ -130,7 +130,7 @@ public class AnnotationRewriter implements IRewriteProvider
     //
     // suite() method: remove, comment out or leave untouched, depending on the setting
     //
-    SuiteMethodTreatment smt = TestNGPlugin.getPluginPreferenceStore().getSuiteMethodTreatement();
+    SuiteMethodTreatment smt = TestUtilitiesPlugin.getPluginPreferenceStore().getSuiteMethodTreatement();
 
     MethodDeclaration suiteMethod = visitor.getSuite();
     if (smt != SuiteMethodTreatment.DONT_TOUCH && suiteMethod != null) {

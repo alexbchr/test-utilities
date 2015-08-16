@@ -1,6 +1,6 @@
 package com.alexbchr.testutilities.testng.ui;
 
-import static org.testng.eclipse.ui.Images.IMG_TEST_HIERARCHY;
+import static com.alexbchr.testutilities.testng.ui.Images.IMG_TEST_HIERARCHY;
 
 import java.util.Hashtable;
 import java.util.List;
@@ -37,16 +37,16 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IMemento;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.ui.tree.BaseTreeItem;
-import org.testng.eclipse.ui.tree.ClassTreeItem;
-import org.testng.eclipse.ui.tree.ITreeItem;
-import org.testng.eclipse.ui.tree.SuiteTreeItem;
-import org.testng.eclipse.ui.tree.TestMethodParametersTreeItem;
-import org.testng.eclipse.ui.tree.TestMethodTreeItem;
-import org.testng.eclipse.ui.tree.TestTreeItem;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.StringUtils;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.ui.tree.BaseTreeItem;
+import com.alexbchr.testutilities.testng.ui.tree.ClassTreeItem;
+import com.alexbchr.testutilities.testng.ui.tree.ITreeItem;
+import com.alexbchr.testutilities.testng.ui.tree.SuiteTreeItem;
+import com.alexbchr.testutilities.testng.ui.tree.TestMethodParametersTreeItem;
+import com.alexbchr.testutilities.testng.ui.tree.TestMethodTreeItem;
+import com.alexbchr.testutilities.testng.ui.tree.TestTreeItem;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.StringUtils;
 
 /**
  * This class is responsible for the tree display in the runner view part. It
@@ -479,7 +479,7 @@ abstract public class AbstractTab extends TestRunTab implements IMenuListener {
 
   private void initImages() {
     m_testHierarchyIcon = Images.getImage(IMG_TEST_HIERARCHY); 
-    m_stackViewIcon = TestNGPlugin.getImageDescriptor("eview16/stackframe.gif")
+    m_stackViewIcon = TestUtilitiesPlugin.getImageDescriptor("eview16/stackframe.gif")
         .createImage(); //$NON-NLS-1$
   }
 

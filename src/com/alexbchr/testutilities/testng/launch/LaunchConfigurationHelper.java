@@ -1,7 +1,7 @@
 package com.alexbchr.testutilities.testng.launch;
 
-import org.testng.eclipse.ui.util.ConfigurationHelper;
-import org.testng.eclipse.util.JDTUtil;
+import com.alexbchr.testutilities.testng.ui.util.ConfigurationHelper;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;

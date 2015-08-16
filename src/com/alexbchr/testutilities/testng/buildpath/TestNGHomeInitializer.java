@@ -11,8 +11,9 @@ import org.eclipse.jdt.core.ClasspathVariableInitializer;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.osgi.framework.Bundle;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
+
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 
 
 /**
@@ -25,7 +26,7 @@ public class TestNGHomeInitializer extends ClasspathVariableInitializer {
    */
   public void initialize(String variable) {
     try {
-        Bundle bundle= TestNGPlugin.getDefault().getBundle(TestNGPlugin.PLUGIN_ID);
+        Bundle bundle= TestUtilitiesPlugin.getDefault().getBundle(TestUtilitiesPlugin.PLUGIN_ID);
         if (bundle == null) {
           clearVariable();
           return;

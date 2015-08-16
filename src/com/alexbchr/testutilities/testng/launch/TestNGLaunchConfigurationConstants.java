@@ -1,6 +1,6 @@
 package com.alexbchr.testutilities.testng.launch;
 
-import org.testng.eclipse.TestNGPlugin;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 
 
 /**
@@ -15,7 +15,7 @@ public abstract class TestNGLaunchConfigurationConstants {
   public static final String ID_TESTNG_APPLICATION = "org.testng.eclipse.launchconfig"; //$NON-NLS-1$
   
   private static String make(String s) {
-    return TestNGPlugin.PLUGIN_ID + "." + s;
+    return TestUtilitiesPlugin.PLUGIN_ID + "." + s;
   }
   
   /**

@@ -41,14 +41,16 @@ import org.eclipse.search.ui.ISearchQuery;
 import org.eclipse.search.ui.text.FileTextSearchScope;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.LaunchType;
-import org.testng.eclipse.ui.RunInfo;
-import org.testng.eclipse.ui.util.ConfigurationHelper;
-import org.testng.eclipse.util.JDTUtil.MethodDefinition;
-import org.testng.eclipse.util.param.ParameterSolver;
+
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.LaunchType;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
+import com.alexbchr.testutilities.testng.ui.util.ConfigurationHelper;
+import com.alexbchr.testutilities.testng.util.JDTUtil.MethodDefinition;
+import com.alexbchr.testutilities.testng.util.param.ParameterSolver;
+
 import org.testng.reporters.FailedReporter;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -97,7 +99,7 @@ public class LaunchUtil {
   public static void launchFailedSuiteConfiguration(IJavaProject javaProject, 
 		  String runMode, ILaunchConfiguration prevConfig, Set failureDescriptions) {
     final String suiteConfName= javaProject.getElementName() + "-" + FailedReporter.TESTNG_FAILED_XML;
-    final String suiteFilePath= TestNGPlugin.getPluginPreferenceStore().getOutputAbsolutePath(javaProject).toOSString() + "/" + FailedReporter.TESTNG_FAILED_XML;
+    final String suiteFilePath= TestUtilitiesPlugin.getPluginPreferenceStore().getOutputAbsolutePath(javaProject).toOSString() + "/" + FailedReporter.TESTNG_FAILED_XML;
     
     launchSuiteConfiguration(javaProject.getProject(),
         suiteConfName,
@@ -174,7 +176,7 @@ public class LaunchUtil {
       launchAttributes.putAll(workingCopy.getAttributes());
     }
     catch(CoreException ce) {
-      TestNGPlugin.log(ce);
+      TestUtilitiesPlugin.log(ce);
     }
 
     if(null != compilationUnit) {
@@ -242,7 +244,7 @@ public class LaunchUtil {
 
     String projectName= ijp.getProject().getName();
     
-    PreferenceStoreUtil storage = TestNGPlugin.getPluginPreferenceStore();
+    PreferenceStoreUtil storage = TestUtilitiesPlugin.getPluginPreferenceStore();
     String preDefinedListeners = storage.getPreDefinedListeners(projectName, false);
     workingCopy.setAttribute(TestNGLaunchConfigurationConstants.PRE_DEFINED_LISTENERS, preDefinedListeners.toString().trim());
 
@@ -285,7 +287,7 @@ public class LaunchUtil {
         methods.addAll(findMethodTransitiveClosure(iMethod, groupInfo));
       }
     } catch (JavaModelException e) {
-      TestNGPlugin.log(e);
+      TestUtilitiesPlugin.log(e);
     }
 
     launchMethodBasedConfiguration(javaProject, methods.toArray(new IMethod[methods.size()]),
@@ -300,7 +302,7 @@ public class LaunchUtil {
     ErrorDialog.openError(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
         "WARNING", 
         elementName + " defines group dependencies that will be ignored. To reliably test methods with group dependencies use a suite definition.", 
-        new Status(IStatus.WARNING, TestNGPlugin.PLUGIN_ID, 3333, 
+        new Status(IStatus.WARNING, TestUtilitiesPlugin.PLUGIN_ID, 3333, 
             elementName + " uses group dependencies " + (groups != null ? groups.toString() : "")
             + " which due to a plugin limitation will be ignored", null));
 
@@ -347,7 +349,7 @@ public class LaunchUtil {
 //                             complianceLevel);
     String projectName= ijp.getProject().getName();
     
-    PreferenceStoreUtil storage = TestNGPlugin.getPluginPreferenceStore();
+    PreferenceStoreUtil storage = TestUtilitiesPlugin.getPluginPreferenceStore();
     String preDefinedListeners = storage.getPreDefinedListeners(projectName, false);
     workingCopy.setAttribute(TestNGLaunchConfigurationConstants.PRE_DEFINED_LISTENERS, preDefinedListeners.toString().trim());
 
@@ -388,7 +390,7 @@ public class LaunchUtil {
         }
       }
       catch(JavaModelException jme) {
-        TestNGPlugin.log(new Status(IStatus.ERROR, TestNGPlugin.PLUGIN_ID, TestNGPluginConstants.LAUNCH_ERROR, "No types in compilation unit " + icu.getElementName(), jme));
+    	  TestUtilitiesPlugin.log(new Status(IStatus.ERROR, TestUtilitiesPlugin.PLUGIN_ID, TestNGPluginConstants.LAUNCH_ERROR, "No types in compilation unit " + icu.getElementName(), jme));
       }
 
       if(null == types) return;
@@ -471,7 +473,7 @@ public class LaunchUtil {
     
     String projectName= javaProject.getProject().getName();
     
-    PreferenceStoreUtil storage = TestNGPlugin.getPluginPreferenceStore();
+    PreferenceStoreUtil storage = TestUtilitiesPlugin.getPluginPreferenceStore();
     String preDefinedListeners = storage.getPreDefinedListeners(projectName, false);
     workingCopy.setAttribute(TestNGLaunchConfigurationConstants.PRE_DEFINED_LISTENERS, preDefinedListeners.toString().trim());
 
@@ -553,7 +555,7 @@ public class LaunchUtil {
       sb.append(m.getDeclaringType().getFullyQualifiedName())
           .append(".").append(m.getElementName()).append(" ");
     }
-    TestNGPlugin.log("Transitive closure for method " + startMethod.getElementName()
+    TestUtilitiesPlugin.log("Transitive closure for method " + startMethod.getElementName()
         + ": "  + sb.toString());
 
     return result;
@@ -600,7 +602,7 @@ public class LaunchUtil {
     for (IType type : result) {
       sb.append(type.getFullyQualifiedName()).append(" ");
     }
-    TestNGPlugin.log("Transitive closure for groups \"" + initialGroups + "\":"  + sb.toString());
+    TestUtilitiesPlugin.log("Transitive closure for groups \"" + initialGroups + "\":"  + sb.toString());
 
     return result;
   }
@@ -654,7 +656,7 @@ public class LaunchUtil {
         configWC= config.getWorkingCopy();
       }
       catch(CoreException cex) {
-        TestNGPlugin.log(new Status(IStatus.ERROR, TestNGPlugin.PLUGIN_ID, TestNGPluginConstants.LAUNCH_ERROR,
+    	  TestUtilitiesPlugin.log(new Status(IStatus.ERROR, TestUtilitiesPlugin.PLUGIN_ID, TestNGPluginConstants.LAUNCH_ERROR,
             "Cannot create working copy of existing launcher " + config.getName(), cex));
       }
     }
@@ -692,7 +694,7 @@ public class LaunchUtil {
       return launchWorkingCopy.doSave();
     }
     catch(CoreException cex) {
-      TestNGPlugin.log(cex);
+    	TestUtilitiesPlugin.log(cex);
     }
     
     return null;
@@ -766,7 +768,7 @@ public class LaunchUtil {
   public static ILaunchConfigurationWorkingCopy setFailedTestsJvmArg (String value, 
 		  ILaunchConfigurationWorkingCopy config) {
 	  try {
-		  String key = TestNGPlugin.getFailedTestsKey();
+		  String key = TestUtilitiesPlugin.getFailedTestsKey();
 		  String jvmargs = config.getAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, "");			
 		  String newarg = key + "=\"" + value + "\" ";
 		  if (!key.startsWith("-D")) newarg = "-D" + newarg;
@@ -845,9 +847,9 @@ public class LaunchUtil {
     ErrorDialog.openError(Display.getCurrent().getActiveShell(),
         "Fatal error",
         string + (ex.getMessage() != null ? ": " + ex.getMessage() : ""),
-        new Status(IStatus.ERROR, TestNGPlugin.PLUGIN_ID, 0,
+        new Status(IStatus.ERROR, TestUtilitiesPlugin.PLUGIN_ID, 0,
             "Status Error Message", null));
-    TestNGPlugin.log(ex);
+    TestUtilitiesPlugin.log(ex);
   }
 
 }

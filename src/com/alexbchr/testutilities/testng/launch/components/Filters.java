@@ -14,7 +14,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.testng.eclipse.ui.util.TypeParser;
+import com.alexbchr.testutilities.testng.ui.util.TypeParser;
 
 
 public class Filters {

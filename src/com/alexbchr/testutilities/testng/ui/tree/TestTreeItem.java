@@ -1,7 +1,7 @@
 package com.alexbchr.testutilities.testng.ui.tree;
 
 import org.eclipse.swt.widgets.TreeItem;
-import org.testng.eclipse.ui.RunInfo;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
 
 import java.text.MessageFormat;
 

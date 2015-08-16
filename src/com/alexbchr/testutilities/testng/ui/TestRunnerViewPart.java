@@ -76,15 +76,15 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.IWorkbenchSiteProgressService;
 import org.eclipse.ui.progress.UIJob;
 import org.testng.ITestResult;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
-import org.testng.eclipse.ui.summary.SummaryTab;
-import org.testng.eclipse.util.CustomSuite;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.LaunchUtil;
-import org.testng.eclipse.util.PreferenceStoreUtil;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.StringUtils;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
+import com.alexbchr.testutilities.testng.ui.summary.SummaryTab;
+import com.alexbchr.testutilities.testng.util.CustomSuite;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.LaunchUtil;
+import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.StringUtils;
 import org.testng.remote.strprotocol.GenericMessage;
 import org.testng.remote.strprotocol.IMessageSender;
 import org.testng.remote.strprotocol.IRemoteSuiteListener;
@@ -139,7 +139,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
   private CounterPanel m_counterPanel;
   private Composite m_counterComposite;
 
-  private final Image m_viewIcon = TestNGPlugin.getImageDescriptor("main16/testng_noshadow.gif").createImage();//$NON-NLS-1$
+  private final Image m_viewIcon = TestUtilitiesPlugin.getImageDescriptor("main16/testng_noshadow.gif").createImage();//$NON-NLS-1$
 
   /**
    * Actions
@@ -169,8 +169,8 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
   private IsRunningJob m_isRunningJob;
   private ILock m_runLock;
 
-  public static final String NAME = "org.testng.eclipse.ResultView"; //$NON-NLS-1$
-  public static final String ID_EXTENSION_POINT_TESTRUN_TABS = TestNGPlugin.PLUGIN_ID + "." //$NON-NLS-1$
+  public static final String NAME = "com.alexbchr.testutilities.testng.ResultView"; //$NON-NLS-1$
+  public static final String ID_EXTENSION_POINT_TESTRUN_TABS = TestUtilitiesPlugin.PLUGIN_ID + "." //$NON-NLS-1$
       + "internal_testRunTabs";  //$NON-NLS-1$
 
   private static final int REFRESH_INTERVAL = 200;
@@ -375,7 +375,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
               postSyncRunnable(new Runnable() {
                 public void run() {
                   boolean useProjectJar =
-                      TestNGPlugin.getPluginPreferenceStore().getUseProjectJar(project.getProject().getName());
+                		  TestUtilitiesPlugin.getPluginPreferenceStore().getUseProjectJar(project.getProject().getName());
                   String suggestion = useProjectJar
                      ? "Uncheck the 'Use Project testng.jar' option from your Project properties and try again."
                      : "Make sure you don't have an older version of testng.jar on your class path.";
@@ -400,12 +400,12 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
     String path = getWatchResultDirectory();
     if (m_watchThread != null) m_watchThread.stopWatching();
     if (enabled) {
-      TestNGPlugin.log("Monitoring results at " + path);
+    	TestUtilitiesPlugin.log("Monitoring results at " + path);
       newSuiteRunInfo(null);
 
       m_watchThread = new WatchResultThread(path, currentSuiteRunInfo, currentSuiteRunInfo);
     } else {
-      if (! StringUtils.isEmptyString(path)) TestNGPlugin.log("No longer monitoring results at " + path);
+      if (! StringUtils.isEmptyString(path)) TestUtilitiesPlugin.log("No longer monitoring results at " + path);
       m_watchThread = null;
     }
   }
@@ -440,7 +440,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
               if (javaProject != null) {
                 m_workingProject = javaProject;
               } else {
-                TestNGPlugin.log("Current project " + project.getName() + " is not a Java project");
+            	  TestUtilitiesPlugin.log("Current project " + project.getName() + " is not a Java project");
               }
             }
           }
@@ -461,7 +461,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
     m_isDisposed = true;
     stopTest();
 
-    TestNGPlugin.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+    TestUtilitiesPlugin.getDefault().getPreferenceStore().removePropertyChangeListener(this);
     m_viewIcon.dispose();
     fOKColor.dispose();
     fFailureColor.dispose();
@@ -515,7 +515,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
       try {
         // Only have the view forcibly shown and take focus if the preference is
         // set to do so, otherwise just make sure the view exists
-        boolean focusOnView = TestNGPlugin.getDefault().getPreferenceStore()
+        boolean focusOnView = TestUtilitiesPlugin.getDefault().getPreferenceStore()
             .getBoolean(TestNGPluginConstants.S_SHOW_VIEW_WHEN_TESTS_COMPLETE);
 
         testRunner = (TestRunnerViewPart) page.findView(TestRunnerViewPart.NAME);
@@ -539,7 +539,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
         }
       }
       catch(PartInitException pie) {
-        TestNGPlugin.log(pie);
+    	  TestUtilitiesPlugin.log(pie);
       }
     }
   }
@@ -659,13 +659,13 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
    * @return true if we should be monitoring testng-results.xml.
    */
   private boolean getWatchResults() {
-    return TestNGPlugin.getPluginPreferenceStore().getWatchResults(getProjectName());
+    return TestUtilitiesPlugin.getPluginPreferenceStore().getWatchResults(getProjectName());
   }
 
   private String getWatchResultDirectory() {
     String projectName = getProjectName();
     return projectName != null
-        ? TestNGPlugin.getPluginPreferenceStore().getWatchResultDirectory(projectName)
+        ? TestUtilitiesPlugin.getPluginPreferenceStore().getWatchResultDirectory(projectName)
         : null;
   }
 
@@ -687,7 +687,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
 
     m_tabFolder = createTestRunTabs(parent);
 
-    TestNGPlugin.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+    TestUtilitiesPlugin.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 
     if (m_stateMemento != null) {
       restoreLayoutState(m_stateMemento);
@@ -916,15 +916,15 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
       super("", AS_RADIO_BUTTON); //$NON-NLS-1$
       if(orientation == TestRunnerViewPart.VIEW_ORIENTATION_HORIZONTAL) {
         setText(ResourceUtil.getString("TestRunnerViewPart.toggle.horizontal.label")); //$NON-NLS-1$
-        setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/th_horizontal.gif")); //$NON-NLS-1$
+        setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/th_horizontal.gif")); //$NON-NLS-1$
       }
       else if(orientation == TestRunnerViewPart.VIEW_ORIENTATION_VERTICAL) {
         setText(ResourceUtil.getString("TestRunnerViewPart.toggle.vertical.label")); //$NON-NLS-1$
-        setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/th_vertical.gif")); //$NON-NLS-1$
+        setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/th_vertical.gif")); //$NON-NLS-1$
       }
       else if(orientation == TestRunnerViewPart.VIEW_ORIENTATION_AUTOMATIC) {
         setText(ResourceUtil.getString("TestRunnerViewPart.toggle.automatic.label")); //$NON-NLS-1$
-        setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/th_automatic.gif")); //$NON-NLS-1$
+        setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/th_automatic.gif")); //$NON-NLS-1$
       }
       fActionOrientation = orientation;
     }
@@ -1057,9 +1057,9 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
     public RerunAction() {
       setText(ResourceUtil.getString("TestRunnerViewPart.rerunaction.label")); //$NON-NLS-1$
       setToolTipText(ResourceUtil.getString("TestRunnerViewPart.rerunaction.tooltip")); //$NON-NLS-1$
-      setDisabledImageDescriptor(TestNGPlugin.getImageDescriptor("dlcl16/relaunch.gif")); //$NON-NLS-1$
-      setHoverImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
-      setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
+      setDisabledImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("dlcl16/relaunch.gif")); //$NON-NLS-1$
+      setHoverImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
+      setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/relaunch.gif")); //$NON-NLS-1$
     }
 
     @Override
@@ -1075,9 +1075,9 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
     public OpenReportAction() {
       setText(ResourceUtil.getString("TestRunnerViewPart.openreport.label")); //$NON-NLS-1$
       setToolTipText(ResourceUtil.getString("TestRunnerViewPart.openreport.tooltip")); //$NON-NLS-1$
-      setDisabledImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/report.gif")); //$NON-NLS-1$
-      setHoverImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/report.gif")); //$NON-NLS-1$
-      setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/report.gif")); //$NON-NLS-1$
+      setDisabledImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/report.gif")); //$NON-NLS-1$
+      setHoverImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/report.gif")); //$NON-NLS-1$
+      setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/report.gif")); //$NON-NLS-1$
     }
 
     private void openEditor(IFile file) {
@@ -1094,7 +1094,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
         IDE.openEditor(page, file);
       }
       catch(final PartInitException e) {
-        TestNGPlugin.log(e);
+    	  TestUtilitiesPlugin.log(e);
       }
     }
 
@@ -1105,7 +1105,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
       if(null == javaProject) {
         return;
       }
-      PreferenceStoreUtil storage= TestNGPlugin.getPluginPreferenceStore();
+      PreferenceStoreUtil storage= TestUtilitiesPlugin.getPluginPreferenceStore();
       IPath filePath= new Path(storage.getOutputDirectoryPath(javaProject).toOSString() + "/index.html");
       boolean isAbsolute= storage.isOutputAbsolutePath(javaProject.getElementName(), false);
 
@@ -1144,9 +1144,9 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
     public RerunFailedAction() {
       setText(ResourceUtil.getString("TestRunnerViewPart.rerunfailedsaction.label")); //$NON-NLS-1$
       setToolTipText(ResourceUtil.getString("TestRunnerViewPart.rerunfailedsaction.tooltip")); //$NON-NLS-1$
-      setDisabledImageDescriptor(TestNGPlugin.getImageDescriptor("dlcl16/relaunchf.gif")); //$NON-NLS-1$
-      setHoverImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/relaunchf.gif")); //$NON-NLS-1$
-      setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/relaunchf.gif")); //$NON-NLS-1$
+      setDisabledImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("dlcl16/relaunchf.gif")); //$NON-NLS-1$
+      setHoverImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/relaunchf.gif")); //$NON-NLS-1$
+      setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/relaunchf.gif")); //$NON-NLS-1$
     }
 
     @Override
@@ -1350,7 +1350,7 @@ implements IPropertyChangeListener, IRemoteSuiteListener, IRemoteTestListener {
 						}
 						buf.append(it.next());
 					}
-					config = LaunchUtil.addJvmArg(TestNGPlugin
+					config = LaunchUtil.addJvmArg(TestUtilitiesPlugin
 							.getFailedTestsKey(), buf.toString(), wc);
 				}
 			} catch (CoreException ce) {

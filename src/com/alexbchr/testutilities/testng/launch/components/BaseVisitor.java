@@ -6,10 +6,10 @@ import java.util.Set;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.testng.eclipse.ui.util.Utils;
-import org.testng.eclipse.util.signature.ASTMethodDescriptor;
-import org.testng.eclipse.util.signature.IMethodDescriptor;
-import org.testng.eclipse.util.signature.MethodDescriptor;
+import com.alexbchr.testutilities.testng.ui.util.Utils;
+import com.alexbchr.testutilities.testng.util.signature.ASTMethodDescriptor;
+import com.alexbchr.testutilities.testng.util.signature.IMethodDescriptor;
+import com.alexbchr.testutilities.testng.util.signature.MethodDescriptor;
 
 import com.google.common.collect.Sets;
 

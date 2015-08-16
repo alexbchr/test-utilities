@@ -13,7 +13,7 @@ import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.text.edits.TextEdit;
-import org.testng.eclipse.ui.conversion.AnnotationRewriter;
+import com.alexbchr.testutilities.testng.ui.conversion.AnnotationRewriter;
 
 import java.util.Collection;
 

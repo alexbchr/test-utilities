@@ -16,12 +16,12 @@ import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.launch.components.ITestContent;
-import org.testng.eclipse.ui.util.TypeParser;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.LaunchUtil;
-import org.testng.eclipse.util.SuiteFileValidator;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.launch.components.ITestContent;
+import com.alexbchr.testutilities.testng.ui.util.TypeParser;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.LaunchUtil;
+import com.alexbchr.testutilities.testng.util.SuiteFileValidator;
 
 /**
  * Base class for Run/Debug contextual actions. Handles TestNG tests, but no
@@ -143,7 +143,7 @@ public abstract class AbstractTestNGLaunchDelegate implements IEditorActionDeleg
       return compilationUnit.getTypes();
     }
     catch(JavaModelException jme) {
-      TestNGPlugin.log(jme);
+      TestUtilitiesPlugin.log(jme);
     }
     
     return null;
@@ -166,7 +166,7 @@ public abstract class AbstractTestNGLaunchDelegate implements IEditorActionDeleg
       return type.getSource() != null;
     }
     catch(JavaModelException jme) {
-      TestNGPlugin.log(jme);
+      TestUtilitiesPlugin.log(jme);
     }
     
     return false;
@@ -177,7 +177,7 @@ public abstract class AbstractTestNGLaunchDelegate implements IEditorActionDeleg
       return SuiteFileValidator.isSuiteDefinition(file);
     }
     catch(CoreException ce) {
-      TestNGPlugin.log(ce);
+      TestUtilitiesPlugin.log(ce);
     }
     
     return false;

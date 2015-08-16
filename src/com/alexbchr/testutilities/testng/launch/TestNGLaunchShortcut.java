@@ -29,9 +29,9 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.ui.IEditorPart;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.launch.tester.JavaTypeExtender;
-import org.testng.eclipse.util.LaunchUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.launch.tester.JavaTypeExtender;
+import com.alexbchr.testutilities.testng.util.LaunchUtil;
 
 /**
  * Right-click launcher.
@@ -78,7 +78,7 @@ public class TestNGLaunchShortcut implements ILaunchShortcut {
         try {
           maybeAddJavaElement(element, types);
         } catch (JavaModelException e) {
-          TestNGPlugin.log(e);
+          TestUtilitiesPlugin.log(e);
         }
 
       }
@@ -121,7 +121,7 @@ public class TestNGLaunchShortcut implements ILaunchShortcut {
   }
 
   private static void p(String s) {
-    TestNGPlugin.log("[TestNGLaunchShortcut] " + s);
+    TestUtilitiesPlugin.log("[TestNGLaunchShortcut] " + s);
 //    System.out.println("[TestNGLaunchShortcut] " + s);
   }
 

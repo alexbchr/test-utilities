@@ -35,8 +35,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.ui.RunInfo;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
 
 /**
  * Class offering utility method to access different Eclipse resources.
@@ -141,7 +141,7 @@ public class JDTUtil {
   }
 
   private static IWorkbenchPage getActivePage() {
-    IWorkbenchWindow window = TestNGPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow();
+    IWorkbenchWindow window = TestUtilitiesPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow();
 
     if (null != window) {
       return window.getActivePage();
@@ -278,7 +278,7 @@ public class JDTUtil {
       }
     }
     catch (JavaModelException jme) {
-      TestNGPlugin.log(jme);
+      TestUtilitiesPlugin.log(jme);
     }
 
     return sourcePaths;
@@ -295,7 +295,7 @@ public class JDTUtil {
 //      return (itype == null) ? "" : TestNGLaunchConfigurationConstants.JDK15_COMPLIANCE;
 //    }
 //    catch (JavaModelException jme) {
-//      TestNGPlugin.log(jme);
+//      TestUtilitiesPlugin.log(jme);
 //    }
 //
 //    return "";

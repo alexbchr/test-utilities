@@ -43,19 +43,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.SelectionDialog;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.LaunchType;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.Protocols;
-import org.testng.eclipse.launch.components.Filters;
-import org.testng.eclipse.ui.Images;
-import org.testng.eclipse.ui.util.ConfigurationHelper;
-import org.testng.eclipse.ui.util.ProjectChooserDialog;
-import org.testng.eclipse.ui.util.TestSelectionDialog;
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.SWTUtil;
-import org.testng.eclipse.util.StringUtils;
-import org.testng.eclipse.util.TestSearchEngine;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.LaunchType;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.Protocols;
+import com.alexbchr.testutilities.testng.launch.components.Filters;
+import com.alexbchr.testutilities.testng.ui.Images;
+import com.alexbchr.testutilities.testng.ui.util.ConfigurationHelper;
+import com.alexbchr.testutilities.testng.ui.util.ProjectChooserDialog;
+import com.alexbchr.testutilities.testng.ui.util.TestSelectionDialog;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.SWTUtil;
+import com.alexbchr.testutilities.testng.util.StringUtils;
+import com.alexbchr.testutilities.testng.util.TestSearchEngine;
 
 /**
  * TestNG specific launcher tab.
@@ -391,10 +391,10 @@ public class TestNGMainTab extends AbstractLaunchConfigurationTab implements ILa
       }
     }
     catch(InterruptedException e) {
-      TestNGPlugin.log(e);
+    	TestUtilitiesPlugin.log(e);
     }
     catch(InvocationTargetException e) {
-      TestNGPlugin.log(e.getTargetException());
+    	TestUtilitiesPlugin.log(e.getTargetException());
     }
     dialog.setBlockOnOpen(true);
     dialog.setTitle(ResourceUtil.getString("TestNGMainTab.testdialog.title")); //$NON-NLS-1$
@@ -591,7 +591,7 @@ public class TestNGMainTab extends AbstractLaunchConfigurationTab implements ILa
       for (TestngTestSelector sel : m_launchSelectors) {
         boolean select = (type == sel.getTestngType());
         sel.setRadioSelected(select);
-        TestNGPlugin.bold(sel.getRadioButton(), select);
+        TestUtilitiesPlugin.bold(sel.getRadioButton(), select);
       }
     }
     updateDialog();

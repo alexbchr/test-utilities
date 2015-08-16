@@ -3,7 +3,7 @@ package com.alexbchr.testutilities.testng.ui.tree;
 import java.text.MessageFormat;
 
 import org.eclipse.swt.widgets.TreeItem;
-import org.testng.eclipse.ui.RunInfo;
+import com.alexbchr.testutilities.testng.ui.RunInfo;
 
 /**
  * Base class for the tree nodes that represent a method.

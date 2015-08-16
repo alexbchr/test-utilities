@@ -6,7 +6,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.wizards.NewTestNGClassWizard;
+import com.alexbchr.testutilities.testng.wizards.NewTestNGClassWizard;
 
 /**
  * Create a TestNG class based on the class currently selected.

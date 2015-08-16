@@ -7,7 +7,7 @@ import org.eclipse.jdt.core.dom.MarkerAnnotation;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
-import org.testng.eclipse.ui.conversion.IRewriteProvider;
+import com.alexbchr.testutilities.testng.ui.conversion.IRewriteProvider;
 
 /**
  * A rewriter that pulls all the @Test annotations at the class level.

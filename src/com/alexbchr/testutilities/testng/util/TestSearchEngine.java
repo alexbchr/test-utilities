@@ -32,10 +32,10 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.ui.PlatformUI;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.launch.components.Filters;
-import org.testng.eclipse.launch.components.ITestContent;
-import org.testng.eclipse.ui.util.TypeParser;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.launch.components.Filters;
+import com.alexbchr.testutilities.testng.launch.components.ITestContent;
+import com.alexbchr.testutilities.testng.ui.util.TypeParser;
 
 /**
  * Search engine for TestNG related elements.
@@ -208,7 +208,7 @@ public class TestSearchEngine {
         types = ((ICompilationUnit) ije).getAllTypes();
       }
       catch(JavaModelException jme) {
-        TestNGPlugin.log(jme);
+    	  TestUtilitiesPlugin.log(jme);
       }
     } 
     else if(IJavaElement.TYPE == ije.getElementType()) {
@@ -244,7 +244,7 @@ public class TestSearchEngine {
           collectTypes(elements[i], new SubProgressMonitor(pm, 1), result, filter);
         }
         catch(CoreException e) {
-          TestNGPlugin.log(e.getStatus());
+        	TestUtilitiesPlugin.log(e.getStatus());
         }
         if(pm.isCanceled()) {
           throw new InterruptedException();
@@ -310,7 +310,7 @@ public class TestSearchEngine {
       return SuiteFileValidator.isSuiteDefinition(f);
     }
     catch(CoreException ce) {
-      TestNGPlugin.log(ce);
+    	TestUtilitiesPlugin.log(ce);
     }
 
     return false;
@@ -358,7 +358,7 @@ public class TestSearchEngine {
       }
     }
     catch(CoreException ce) {
-      TestNGPlugin.log(ce);
+    	TestUtilitiesPlugin.log(ce);
     }
   }
 
@@ -463,7 +463,7 @@ public class TestSearchEngine {
         }
       }
       catch(JavaModelException jme) {
-        TestNGPlugin.log(jme);
+    	  TestUtilitiesPlugin.log(jme);
       }
     }
 
@@ -476,7 +476,7 @@ public class TestSearchEngine {
         }
       }
       catch(JavaModelException jme) {
-        TestNGPlugin.log(jme);
+    	  TestUtilitiesPlugin.log(jme);
       }
 
     }
@@ -495,7 +495,7 @@ public class TestSearchEngine {
         }
       }
       catch(JavaModelException jme) {
-        TestNGPlugin.log(jme);
+    	  TestUtilitiesPlugin.log(jme);
       }
     }
   }
@@ -509,7 +509,7 @@ public class TestSearchEngine {
 					findPackages(children[i], result);
 				}
 			} catch (JavaModelException jme) {
-				TestNGPlugin.log(jme);
+				TestUtilitiesPlugin.log(jme);
 			}
 		}
 
@@ -522,7 +522,7 @@ public class TestSearchEngine {
 					findPackages(compilationUnits[i], result);
 				}
 			} catch (JavaModelException jme) {
-				TestNGPlugin.log(jme);
+				TestUtilitiesPlugin.log(jme);
 			}
 
 		}
@@ -541,7 +541,7 @@ public class TestSearchEngine {
 	          }
 	        }
 	        catch(JavaModelException jme) {
-	          TestNGPlugin.log(jme);
+	        	TestUtilitiesPlugin.log(jme);
 	        }
 	      }
 	}
@@ -556,7 +556,7 @@ public class TestSearchEngine {
 					findMethods(children[i], result, className);
 				}
 			} catch (JavaModelException jme) {
-				TestNGPlugin.log(jme);
+				TestUtilitiesPlugin.log(jme);
 			}
 		}
 
@@ -571,7 +571,7 @@ public class TestSearchEngine {
 				}
 				
 			} catch (JavaModelException jme) {
-				TestNGPlugin.log(jme);
+				TestUtilitiesPlugin.log(jme);
 			}
 		}
 
@@ -605,7 +605,7 @@ public class TestSearchEngine {
 					}
 				}
 			} catch (JavaModelException jme) {
-				TestNGPlugin.log(jme);
+				TestUtilitiesPlugin.log(jme);
 			}
 		}								
 	}

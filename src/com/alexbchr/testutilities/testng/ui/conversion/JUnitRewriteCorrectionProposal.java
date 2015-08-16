@@ -29,7 +29,7 @@ import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.text.edits.TextEditVisitor;
 import org.eclipse.text.edits.UndoEdit;
-import org.testng.eclipse.ui.Images;
+import com.alexbchr.testutilities.testng.ui.Images;
 
 /**
  * This class implements the proposal to convert a JUnit class into a TestNG one.

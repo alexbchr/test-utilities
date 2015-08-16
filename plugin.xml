@@ -1,111 +1,408 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point id="testListenerContributorSchema" name="%testListenerContributor.name" schema="schema/testListenerContributorSchema.exsd"/>
+   <extension-point id="reporterListenerContributorSchema" name="%reporterListenerContributor.name" schema="schema/reporterListenerContributorSchema.exsd"/>
 	
 
-	<!-- START JUnit -->
-	<!--<extension
-         point="org.eclipse.ui.newWizards">
-      <category
-      		id="com.alexbchr.testutilities.ui.TestWizardCategory"
-      		name="%WizardCategory.name">
-      </category>
-      <wizard
-            name="%TestCaseWizard.name"
-            icon="$nl$/icons/wizard/new_testcase.gif"
-            category="com.alexbchr.testutilities.ui.TestWizardCategory"
-            id="com.alexbchr.testutilities.wizards.NewTestCaseCreationWizard">
-         <class
-               class="org.eclipse.jdt.internal.junit.wizards.NewTestCaseCreationWizard">
-            <parameter
-                  name="javatype"
-                  value="true">
-            </parameter>
-         </class>
-         <description>
-            %TestWizard.description
-         </description>
-         <keywordReference id="org.eclipse.jdt.junit.wizards.java"/>
-      </wizard>
-      <wizard
-            name="%TestSuiteWizard.name"
-            icon="$nl$/icons/full/etool16/new_testsuite.gif"
-            category="org.eclipse.jdt.ui.java/org.eclipse.jdt.junit"
-            class="org.eclipse.jdt.internal.junit.wizards.NewTestSuiteCreationWizard"
-            id="org.eclipse.jdt.junit.wizards.NewTestSuiteCreationWizard">
-         <description>
-            %SuiteWizard.description
-         </description>
-         <keywordReference id="org.eclipse.jdt.junit.wizards.java"/>
-      </wizard>
-   </extension>
-   <!-- END JUnit -->
-   <extension
+	<extension
+      point="org.eclipse.core.expressions.propertyTesters">
+
+    <propertyTester
+          id="com.alexbchr.testutilities.testng.launch.tester.TestNGPropertyTester"
+          type="org.eclipse.core.runtime.IAdaptable"
+          namespace="com.alexbchr.testutilities.testng"
+          properties="isTest,isSuite,isXmlSuite"
+          class="com.alexbchr.testutilities.testng.launch.tester.TestNGPropertyTester">
+    </propertyTester>
+  </extension>
+
+  <extension point="org.eclipse.ui.popupMenus">
+    <viewerContribution
+        id="testng.editor.popup"
+        targetID="#CompilationUnitEditorContext" >
+      <menu
+            id="testng.editor.menu"
+            label="TestNG"
+            path="additions">
+         <groupMarker name="content"/>
+         <separator name="additions"/>
+      </menu>
+    </viewerContribution>
+  </extension>
+
+  <extension point="org.eclipse.jdt.core.classpathVariableInitializer">
+      <classpathVariableInitializer
+            variable="TESTNG_HOME"
+            class="com.alexbchr.testutilities.testng.buildpath.TestNGHomeInitializer">
+      </classpathVariableInitializer>
+  </extension>
+       
+  <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            type="com.alexbchr.testutilities.testng.launchconfig"
+            class="com.alexbchr.testutilities.testng.launch.TestNGTabGroup"
+            id="com.alexbchr.testutilities.testng.launchConfigurationTabGroup.testng"/>
+  </extension>
+  <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationDelegate"
+            id="com.alexbchr.testutilities.testng.launchconfig"
+            modes="run,debug"
+            name="TestNG"
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+      </launchConfigurationType>
+  </extension>
+
+  <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="com.alexbchr.testutilities.testng.launchconfig"
+            icon="icons/testng/full/main16/testng.gif"
+            id="com.alexbchr.testutilities.testng.launchimage"/>
+  </extension>
+
+  <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.eclipse.jdt.ui.java"
+            class="com.alexbchr.testutilities.testng.ui.TestRunnerViewPart"
+            icon="icons/testng/full/main16/testng_blur.gif"
+            id="com.alexbchr.testutilities.testng.ResultView"
+            name="%TestNG4Eclipse.ResultView"/>
+  </extension>
+
+  <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="com.alexbchr.testutilities.testng.launch.TestNGLaunchShortcut"
+            icon="icons/testng/full/main16/testng.gif"
+            id="com.alexbchr.testutilities.testng.shortcut"
+            label="%TestNGShortcut.test.label"
+            modes="run,debug">
+         <contextualLaunch>
+            <enablement>
+               <with variable="selection">
+                  <iterate>
+                    <or>
+                      <test property="org.eclipse.debug.ui.matchesPattern" value="*.java"/>
+                      <test property="org.eclipse.debug.ui.matchesPattern" value="*.class"/>
+                      <instanceof value="org.eclipse.jdt.core.IJavaElement"/>
+                    </or>
+                    <test property="com.alexbchr.testutilities.testng.isTest" forcePluginActivation="true"/>
+                  </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <perspective
+               id="org.eclipse.jdt.ui.JavaPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.jdt.ui.JavaHierarchyPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.jdt.ui.JavaBrowsingPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.debug.ui.DebugPerspective">
+         </perspective>
+      </shortcut>
+      <shortcut
+            class="com.alexbchr.testutilities.testng.launch.TestNGSuiteLaunchShortcut"
+            icon="icons/testng/full/main16/testng.gif"
+            id="com.alexbchr.testutilities.testng.shortcut.testngSuite"
+            label="%TestNGShortcut.suite.label"
+            modes="run,debug">
+         <contextualLaunch>
+            <enablement>
+               <with variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate>
+                    <test property="org.eclipse.debug.ui.matchesPattern" value="*.xml|*.yaml"/>
+                    <instanceof value="org.eclipse.core.resources.IFile"/>
+                    <test property="com.alexbchr.testutilities.testng.isSuite"/>
+                  </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <perspective
+               id="org.eclipse.jdt.ui.JavaPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.jdt.ui.JavaHierarchyPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.jdt.ui.JavaBrowsingPerspective">
+         </perspective>
+         <perspective
+               id="org.eclipse.debug.ui.DebugPerspective">
+         </perspective>
+      </shortcut>
+  </extension>
+
+  <!-- Project specific properties -->
+  <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="com.alexbchr.testutilities.testng.ui.preferences.ProjectPropertyPage"
+            id="com.alexbchr.testutilities.testng.properties.propertyPage1"
+            name="TestNG">
+         <enabledWhen>
+            <and>
+               <adapt
+                     type="org.eclipse.core.resources.IProject">
+               </adapt>
+            </and>
+         </enabledWhen>
+      </page>
+  </extension>
+   
+  <extension
          point="org.eclipse.ui.commands">
-      <!--<category
-            name="Sample Category"
-            id="com.alexbchr.testutilities.commands.category">
-      </category>
       <command
-            name="Sample Command"
-            categoryId="com.alexbchr.testutilities.commands.category"
-            id="com.alexbchr.testutilities.commands.sampleCommand">
-      </command>-->
-   </extension>
-   <!--<extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            commandId="com.alexbchr.testutilities.commands.sampleCommand"
-            class="com.alexbchr.testutilities.handlers.SampleHandler">
-      </handler>
-   </extension>-->
-   <!--<extension
+            name="%TestNGCommand.run.test.label"
+            description="%TestNGCommand.run.test.label"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="com.alexbchr.testutilities.testng.shortcut.run">
+      </command>
+      <command
+            name="%TestNGCommand.debug.test.label"
+            description="%TestNGCommand.debug.test.label"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="com.alexbchr.testutilities.testng.shortcut.debug">
+      </command>
+      <command
+            name="%TestNGCommand.run.suite.label"
+            description="%TestNGCommand.run.suite.label"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="com.alexbchr.testutilities.testng.shortcut.testngSuite.run">
+      </command>
+      <command
+            name="%TestNGCommand.debug.suite.label"
+            description="%TestNGCommand.debug.suite.label"
+            categoryId="org.eclipse.debug.ui.category.run"
+            id="com.alexbchr.testutilities.testng.shortcut.testngSuite.debug">
+      </command>
+      <command
+            name="Convert to TestNG"
+            description="Convert the selection to TestNG"
+            categoryId="org.eclipse.jdt.ui.category.refactoring"
+            id="com.alexbchr.testutilities.testng.convertAction"
+            defaultHandler="com.alexbchr.testutilities.testng.refactoring.ConvertFromJUnitAction"
+            >
+      </command>
+      <command
+            name="Create TestNG class"
+            description="Create a TestNG class to test this class"
+            categoryId="org.eclipse.jdt.ui.category.refactoring"
+            id="com.alexbchr.testutilities.testng.createClassAction"
+            defaultHandler="com.alexbchr.testutilities.testng.refactoring.CreateClassAction"
+            >
+      </command>
+      <command
+            name="Convert to YAML"
+            description="Convert the XML file to YAML"
+            id="com.alexbchr.testutilities.testng.convertToYamlAction"
+            defaultHandler="com.alexbchr.testutilities.testng.refactoring.ConvertToYamlAction"
+            >
+      </command>
+  </extension>
+
+  <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="com.alexbchr.testutilities.commands.sampleCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            sequence="M1+6"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
-      </key>
-   </extension>-->
+            sequence="M3+M2+D N"
+            commandId="com.alexbchr.testutilities.testng.shortcut.debug"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+          <!-- COMMAND+ALT+Q is "Hide/Show Dock" on carbon, so don't overwrite it -->
+      <key
+            sequence="M3+M2+X N"
+            commandId="com.alexbchr.testutilities.testng.shortcut.run"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+      <key
+            sequence="M3+M2+D G"
+            commandId="com.alexbchr.testutilities.testng.shortcut.testngSuite.debug"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+          <!-- COMMAND+ALT+Q is "Hide/Show Dock" on carbon, so don't overwrite it -->
+      <key
+            sequence="M3+M2+X G"
+            commandId="com.alexbchr.testutilities.testng.shortcut.testngSuite.run"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+  </extension>
+   
+  <extension
+         point="org.eclipse.jdt.ui.quickAssistProcessors">
+          <quickAssistProcessor
+                   id="com.alexbchr.testutilities.testng.ui.conversion.JUnitConverterQuickAssistProcessor"
+                   name="com.alexbchr.testutilities.testng.ui.conversion.JUnitConverterQuickAssistProcessor"
+                   class="com.alexbchr.testutilities.testng.ui.conversion.JUnitConverterQuickAssistProcessor">
+          </quickAssistProcessor>
+          <quickAssistProcessor
+                class="com.alexbchr.testutilities.testng.refactoring.TestNGQuickAssistProcessor"
+                id="com.alexbchr.testutilities.testng.refactoring.TestNGQuickAssistProcessor"
+                name="com.alexbchr.testutilities.testng.refactoring.TestNGQuickAssistProcessor">
+          </quickAssistProcessor>
+  </extension>
+
+  <extension
+         point="org.eclipse.jdt.ui.quickFixProcessors">
+      <quickFixProcessor
+            class="com.alexbchr.testutilities.testng.ui.TestNGQuickFixProcessor"
+            id="com.alexbchr.testutilities.testng.ui.TestNGQuickFixProcessor"
+            name="com.alexbchr.testutilities.testng.ui.TestNGQuickFixProcessor"/>
+  </extension>
+
+  <extension
+         point="org.eclipse.jdt.core.classpathContainerInitializer">
+      <classpathContainerInitializer
+            class="com.alexbchr.testutilities.testng.buildpath.TestNGContainerInitializer"
+            id="org.testng.TESTNG_CONTAINER"/>
+  </extension>
+
+  <!-- Workspace wide preferences -->
+  <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="com.alexbchr.testutilities.testng.ui.preferences.WorkspacePreferencePage"
+            id="com.alexbchr.testutilities.testng.ui.preferences.PreferencePage"
+            name="TestNG"/>
+      <page
+            class="com.alexbchr.testutilities.testng.ui.preferences.RunDebugPreferencePage"
+            id="com.alexbchr.testutilities.testng.ui.preferences.RunDebugPreferencePage"
+            category="com.alexbchr.testutilities.testng.ui.preferences.PreferencePage"
+            name="Run/Debug"/>
+  </extension>
+
+  <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.alexbchr.testutilities.testng.ui.preferences.PreferenceInitializer"/>
+  </extension>
+
+  <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="com.alexbchr.testutilities.testng"
+            name="TestNG">
+      </category>
+      <wizard
+            category="com.alexbchr.testutilities.testng"
+            class="com.alexbchr.testutilities.testng.wizards.NewTestNGClassWizard"
+            icon="icons/testng/full/main16/testng.gif"
+            id="com.alexbchr.testutilities.testng.wizards.NewTestNGClassWizard"
+            name="TestNG class">
+      </wizard>
+  </extension>
+
+  <extension
+         point="org.eclipse.ltk.core.refactoring.refactoringContributions">
+      <contribution
+            class="com.alexbchr.testutilities.testng.refactoring.ConvertFromJUnitRefactoringContribution"
+            id="com.alexbchr.testutilities.testng.convert">
+      </contribution>
+  </extension>
+<!--
    <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
-         <!--<menu
-               label="Sample Menu"
-               mnemonic="M"
-               id="com.alexbchr.testutilities.menus.sampleMenu">
-            <command
-                  commandId="com.alexbchr.testutilities.commands.sampleCommand"
-                  mnemonic="S"
-                  id="com.alexbchr.testutilities.menus.sampleCommand">
-            </command>
-         </menu>-->
-      </menuContribution>
-      <menuContribution
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <!--<toolbar
-               id="com.alexbchr.testutilities.toolbars.sampleToolbar">
-            <command
-                  commandId="com.alexbchr.testutilities.commands.sampleCommand"
-                  icon="icons/sample.gif"
-                  tooltip="Say hello world"
-                  id="com.alexbchr.testutilities.toolbars.sampleCommand">
-            </command>
-         </toolbar>-->
-      </menuContribution>
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="com.alexbchr.testutilities.testng.actionSet"
+            label="TestNG actionSet">
+         <menu
+               id="com.alexbchr.testutilities.testng.menu1"
+               label="TestNG actionSet menu"
+               path="edit">
+            <separator
+                  name="com.alexbchr.testutilities.testng.separator1">
+            </separator>
+         </menu>
+      </actionSet>
    </extension>
-   <extension
-         id="PriorJBuilder"
-         point="org.eclipse.core.resources.builders">
-      <builder
-            callOnEmptyDelta="false"
-            hasNature="false"
-            isConfigurable="false"
-            supportsConfigurations="false">
-            <run class="com.alexbchr.testutilities.priorj.core.PriorJBuilder" />
-      </builder>
-   </extension>
+-->
+
+ <extension point="org.eclipse.ui.menus">
+     <menuContribution
+           allPopups="false"
+           locationURI="popup:org.eclipse.ui.popup.any">
+        <separator
+              name="testng-eclipse.separator2"
+              visible="true">
+        </separator>
+
+        <menu label="TestNG">
+          <visibleWhen>
+              <iterate ifEmpty="false">
+                 <adapt type="org.eclipse.jdt.core.IJavaElement">
+                   <instanceof value="org.eclipse.jdt.core.IJavaElement" />
+                 </adapt>
+              </iterate>
+          </visibleWhen>
+          <command
+              commandId="com.alexbchr.testutilities.testng.createClassAction"
+              icon="icons/testng/full/main16/testng-create.gif"
+              label="Create TestNG class"
+              style="push">
+          </command>
+          <command
+              commandId="com.alexbchr.testutilities.testng.convertAction"
+              icon="icons/testng/full/main16/testng-convert.gif"
+              label="Convert to TestNG"
+              style="push">
+          </command>
+        </menu>
+
+       <menu label="TestNG">
+          <visibleWhen>
+            <with variable="selection">
+              <iterate
+                    ifEmpty="false">
+                 <adapt type="org.eclipse.core.resources.IFile">
+                   <test property="org.eclipse.core.resources.name" value="*.xml"/>
+                   <test property="com.alexbchr.testutilities.testng.isXmlSuite"/>
+                   <instanceof value="org.eclipse.core.resources.IFile" />
+<!--
+                 <adapt type="org.eclipse.core.runtime.IAdaptable">
+-->
+                 </adapt>
+              </iterate>
+            </with>
+          </visibleWhen>
+
+          <command
+              commandId="com.alexbchr.testutilities.testng.convertToYamlAction"
+              label="Convert to YAML"
+              style="push">
+          </command>
+        </menu>
+
+    </menuContribution>
+  </extension>
+ <extension
+       point="org.eclipse.jdt.ui.classpathContainerPage">
+    <classpathContainerPage
+          class="com.alexbchr.testutilities.testng.ui.buildpath.TestNGContainerWizardPage"
+          id="org.testng.TESTNG_CONTAINER"
+          name="TestNG">
+    </classpathContainerPage>
+ </extension>
+ <extension
+       point="org.eclipse.ui.editors.templates">
+    <template
+          autoinsert="false"
+          contextTypeId="java-members"
+          description="%template.testmethod.desc"
+          id="com.alexbchr.testutilities.testng.template.testmethod"
+          name="%template.testmethod.name">
+       <pattern>
+          @${testType:newType(org.testng.annotations.Test)}
+public void ${testName}() throws Exception {
+    ${cursor}
+}
+       </pattern>
+    </template>
+ </extension>
 
 </plugin>

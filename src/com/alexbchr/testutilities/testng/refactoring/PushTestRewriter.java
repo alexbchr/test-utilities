@@ -6,7 +6,7 @@ import org.eclipse.jdt.core.dom.MarkerAnnotation;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
-import org.testng.eclipse.ui.conversion.IRewriteProvider;
+import com.alexbchr.testutilities.testng.ui.conversion.IRewriteProvider;
 
 /**
  * A rewriter that removes the @Test annotation on the class and moves it

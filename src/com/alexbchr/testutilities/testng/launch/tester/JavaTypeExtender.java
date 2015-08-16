@@ -2,7 +2,7 @@ package com.alexbchr.testutilities.testng.launch.tester;
 
 import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.jdt.core.IJavaElement;
-import org.testng.eclipse.util.TestSearchEngine;
+import com.alexbchr.testutilities.testng.util.TestSearchEngine;
 
 
 public class JavaTypeExtender extends PropertyTester {

@@ -4,7 +4,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
-import org.testng.eclipse.TestNGPlugin;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 
 public class Images {
   private static ImageRegistry m_imageRegistry;
@@ -39,24 +39,24 @@ public class Images {
     //
     // Tree display
     //
-    m_imageRegistry.put(IMG_TESTNG, TestNGPlugin.getImageDescriptor("main16/testng.gif"));
-    m_imageRegistry.put(IMG_SUITE, TestNGPlugin.getImageDescriptor("obj16/suite.gif"));
-    m_imageRegistry.put(IMG_SUITE_OK, TestNGPlugin.getImageDescriptor("obj16/suiteok.gif"));
-    m_imageRegistry.put(IMG_SUITE_SKIP, TestNGPlugin.getImageDescriptor("obj16/suiteskip.gif"));
-    m_imageRegistry.put(IMG_SUITE_FAIL, TestNGPlugin.getImageDescriptor("obj16/suitefail.gif"));
-    m_imageRegistry.put(IMG_SUITE_RUN, TestNGPlugin.getImageDescriptor("obj16/suiterun.gif"));
-    m_imageRegistry.put(IMG_TEST_HIERARCHY, TestNGPlugin.getImageDescriptor("obj16/testhier.gif"));
-    m_imageRegistry.put(IMG_TEST, TestNGPlugin.getImageDescriptor("obj16/test.gif"));
-    m_imageRegistry.put(IMG_TEST_OK, TestNGPlugin.getImageDescriptor("obj16/testok.gif"));
-    m_imageRegistry.put(IMG_TEST_SKIP, TestNGPlugin.getImageDescriptor("obj16/testskip.gif"));
-    m_imageRegistry.put(IMG_TEST_FAIL, TestNGPlugin.getImageDescriptor("obj16/testfail.gif"));
-    m_imageRegistry.put(IMG_TEST_RUN, TestNGPlugin.getImageDescriptor("obj16/testrun.gif"));
+    m_imageRegistry.put(IMG_TESTNG, TestUtilitiesPlugin.getImageDescriptor("main16/testng.gif"));
+    m_imageRegistry.put(IMG_SUITE, TestUtilitiesPlugin.getImageDescriptor("obj16/suite.gif"));
+    m_imageRegistry.put(IMG_SUITE_OK, TestUtilitiesPlugin.getImageDescriptor("obj16/suiteok.gif"));
+    m_imageRegistry.put(IMG_SUITE_SKIP, TestUtilitiesPlugin.getImageDescriptor("obj16/suiteskip.gif"));
+    m_imageRegistry.put(IMG_SUITE_FAIL, TestUtilitiesPlugin.getImageDescriptor("obj16/suitefail.gif"));
+    m_imageRegistry.put(IMG_SUITE_RUN, TestUtilitiesPlugin.getImageDescriptor("obj16/suiterun.gif"));
+    m_imageRegistry.put(IMG_TEST_HIERARCHY, TestUtilitiesPlugin.getImageDescriptor("obj16/testhier.gif"));
+    m_imageRegistry.put(IMG_TEST, TestUtilitiesPlugin.getImageDescriptor("obj16/test.gif"));
+    m_imageRegistry.put(IMG_TEST_OK, TestUtilitiesPlugin.getImageDescriptor("obj16/testok.gif"));
+    m_imageRegistry.put(IMG_TEST_SKIP, TestUtilitiesPlugin.getImageDescriptor("obj16/testskip.gif"));
+    m_imageRegistry.put(IMG_TEST_FAIL, TestUtilitiesPlugin.getImageDescriptor("obj16/testfail.gif"));
+    m_imageRegistry.put(IMG_TEST_RUN, TestUtilitiesPlugin.getImageDescriptor("obj16/testrun.gif"));
 
-    m_imageRegistry.put(IMG_COMPARE_DISABLED,TestNGPlugin.getImageDescriptor("dlcl16/compare.gif"));
-    m_imageRegistry.put(IMG_COMPARE_HOVER, TestNGPlugin.getImageDescriptor("elcl16/compare.gif"));
-    m_imageRegistry.put(IMG_COMPARE, TestNGPlugin.getImageDescriptor("elcl16/compare.gif"));
+    m_imageRegistry.put(IMG_COMPARE_DISABLED,TestUtilitiesPlugin.getImageDescriptor("dlcl16/compare.gif"));
+    m_imageRegistry.put(IMG_COMPARE_HOVER, TestUtilitiesPlugin.getImageDescriptor("elcl16/compare.gif"));
+    m_imageRegistry.put(IMG_COMPARE, TestUtilitiesPlugin.getImageDescriptor("elcl16/compare.gif"));
 
-    m_imageRegistry.put(IMG_STOP, TestNGPlugin.getImageDescriptor("obj16/terminatedlaunch_obj.png"));
+    m_imageRegistry.put(IMG_STOP, TestUtilitiesPlugin.getImageDescriptor("obj16/terminatedlaunch_obj.png"));
   }
 
   public static Image getTestNGImage() {

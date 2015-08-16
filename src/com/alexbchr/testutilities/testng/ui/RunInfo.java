@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.testng.ITestResult;
-import org.testng.eclipse.util.CustomSuite;
+import com.alexbchr.testutilities.testng.util.CustomSuite;
 /**
  * Carries along information about a test result.
  * 

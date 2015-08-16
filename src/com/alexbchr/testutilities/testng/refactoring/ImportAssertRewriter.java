@@ -5,7 +5,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.ImportDeclaration;
 import org.eclipse.jdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.jdt.core.dom.rewrite.ListRewrite;
-import org.testng.eclipse.ui.conversion.IRewriteProvider;
+import com.alexbchr.testutilities.testng.ui.conversion.IRewriteProvider;
 
 public class ImportAssertRewriter implements IRewriteProvider {
 

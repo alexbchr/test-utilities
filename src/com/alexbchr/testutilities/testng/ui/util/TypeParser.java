@@ -1,8 +1,8 @@
 package com.alexbchr.testutilities.testng.ui.util;
 
-import org.testng.eclipse.launch.components.AnnotationVisitor;
-import org.testng.eclipse.launch.components.BaseVisitor;
-import org.testng.eclipse.launch.components.ITestContent;
+import com.alexbchr.testutilities.testng.launch.components.AnnotationVisitor;
+import com.alexbchr.testutilities.testng.launch.components.BaseVisitor;
+import com.alexbchr.testutilities.testng.launch.components.ITestContent;
 
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.dom.AST;

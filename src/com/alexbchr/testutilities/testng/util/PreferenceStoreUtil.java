@@ -5,8 +5,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.testng.TestNG;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
 
 import java.io.File;
 import java.util.Random;
@@ -158,7 +158,7 @@ public class PreferenceStoreUtil {
     String strUsePrjJar = m_storage.getString(projectName + TestNGPluginConstants.S_USEPROJECTJAR);
     // if no project level setting, query from global
     if (strUsePrjJar == null || strUsePrjJar.isEmpty()) {
-      return TestNGPlugin.getDefault().getPreferenceStore()
+      return TestUtilitiesPlugin.getDefault().getPreferenceStore()
           .getBoolean(TestNGPluginConstants.S_USEPROJECTJAR_GLOBAL);
     }
     return Boolean.valueOf(strUsePrjJar).booleanValue();

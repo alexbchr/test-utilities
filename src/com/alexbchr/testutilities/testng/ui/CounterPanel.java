@@ -1,7 +1,5 @@
 package com.alexbchr.testutilities.testng.ui;
 
-import org.testng.eclipse.TestNGPlugin;
-
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
@@ -15,6 +13,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+
 /**
  * A panel presenting report info:
  * 1st row: suite counters, test counters, method counters
@@ -26,9 +26,9 @@ import org.eclipse.swt.widgets.Text;
  */
 public class CounterPanel extends Composite {
   private static final String TOTAL_MESSAGE_FORMAT = "{0}/{1}  ";
-  private final Image m_successIcon = TestNGPlugin.getImageDescriptor("ovr16/success.gif").createImage(); //$NON-NLS-1$
-  private final Image m_failureIcon = TestNGPlugin.getImageDescriptor("ovr16/failure.gif").createImage(); //$NON-NLS-1$
-  private final Image m_skipIcon = TestNGPlugin.getImageDescriptor("ovr16/skip.gif").createImage(); //$NON-NLS-1$
+  private final Image m_successIcon = TestUtilitiesPlugin.getImageDescriptor("ovr16/success.gif").createImage(); //$NON-NLS-1$
+  private final Image m_failureIcon = TestUtilitiesPlugin.getImageDescriptor("ovr16/failure.gif").createImage(); //$NON-NLS-1$
+  private final Image m_skipIcon = TestUtilitiesPlugin.getImageDescriptor("ovr16/skip.gif").createImage(); //$NON-NLS-1$
 //  private final Image m_failPercentIcon = TestNGPlugin.getImageDescriptor("ovr16/failureOnPercentage.gif").createImage(); //$NON-NLS-1$
 
 //  protected Text m_suiteCountText;

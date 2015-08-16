@@ -25,11 +25,11 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.TwoPaneElementSelector;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.launch.TestNGLaunchConfigurationConstants.LaunchType;
-import org.testng.eclipse.launch.components.Filters;
-import org.testng.eclipse.util.ResourceUtil;
-import org.testng.eclipse.util.TestSearchEngine;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.launch.TestNGLaunchConfigurationConstants.LaunchType;
+import com.alexbchr.testutilities.testng.launch.components.Filters;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.TestSearchEngine;
 
 import java.lang.reflect.InvocationTargetException;
 import java.text.MessageFormat;
@@ -155,7 +155,7 @@ public class TestSelectionDialog extends TwoPaneElementSelector {
 				} catch (InterruptedException e) {
 					return CANCEL;
 				} catch (InvocationTargetException e) {
-					TestNGPlugin.log(e.getTargetException());
+					TestUtilitiesPlugin.log(e.getTargetException());
 
 					return CANCEL;
 				}
@@ -168,7 +168,7 @@ public class TestSelectionDialog extends TwoPaneElementSelector {
 				} catch (InterruptedException e) {
 					return CANCEL;
 				} catch (InvocationTargetException e) {
-					TestNGPlugin.log(e.getTargetException());
+					TestUtilitiesPlugin.log(e.getTargetException());
 
 					return CANCEL;
 				}
@@ -182,7 +182,7 @@ public class TestSelectionDialog extends TwoPaneElementSelector {
 				} catch (InterruptedException e) {
 					return CANCEL;
 				} catch (InvocationTargetException e) {
-					TestNGPlugin.log(e.getTargetException());
+					TestUtilitiesPlugin.log(e.getTargetException());
 
 					return CANCEL;
 				}

@@ -17,9 +17,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 /**
  * Workspace wide preferences for TestNG.
@@ -39,7 +39,7 @@ public class WorkspacePreferencePage
   
   public WorkspacePreferencePage() {
     super(GRID);
-    setPreferenceStore(TestNGPlugin.getDefault().getPreferenceStore());
+    setPreferenceStore(TestUtilitiesPlugin.getDefault().getPreferenceStore());
     setDescription("TestNG workbench preferences"); //$NON-NLS-1$
   }
 

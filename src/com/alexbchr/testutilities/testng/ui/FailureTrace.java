@@ -32,8 +32,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.ToolBar;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.PreferenceStoreUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,9 +46,9 @@ import java.util.regex.Pattern;
 class FailureTrace implements IMenuListener {
   private static final String  FRAME_PREFIX = "at "; //$NON-NLS-1$
   
-  private final Image m_stackIcon = TestNGPlugin.getImageDescriptor(
+  private final Image m_stackIcon = TestUtilitiesPlugin.getImageDescriptor(
       "obj16/stkfrm_obj.gif").createImage(); //$NON-NLS-1$
-  private final Image m_exceptionIcon = TestNGPlugin.getImageDescriptor(
+  private final Image m_exceptionIcon = TestUtilitiesPlugin.getImageDescriptor(
       "obj16/exc_catch.gif").createImage(); //$NON-NLS-1$
 
   private final Clipboard fClipboard;
@@ -268,7 +268,7 @@ class FailureTrace implements IMenuListener {
    */
   private boolean isExcluded(String line) {
     PreferenceStoreUtil storage =
-      new PreferenceStoreUtil(TestNGPlugin.getDefault().getPreferenceStore());
+      new PreferenceStoreUtil(TestUtilitiesPlugin.getDefault().getPreferenceStore());
 
     String projectName = fTestRunner.getLaunchedProject().getProject().getName();
     String excludedStackTraces = storage.getExcludedStackTraces(projectName);

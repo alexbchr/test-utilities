@@ -1,8 +1,9 @@
 package com.alexbchr.testutilities.testng.ui;
 
 import org.eclipse.jface.action.Action;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.ResourceUtil;
+
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class ClearResultsAction extends Action {
 
   public ClearResultsAction(List<TestRunTab> tabs) {
     m_tabs = tabs;
-    setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/clear.gif"));
+    setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/clear.gif"));
     setToolTipText(ResourceUtil.getString("TestRunnerViewPart.clearResults.tooltip")); //$NON-NLS-1$
   }
 

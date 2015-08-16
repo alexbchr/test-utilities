@@ -34,10 +34,10 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.testng.eclipse.launch.components.Filters.ITypeFilter;
-import org.testng.eclipse.refactoring.FindTestsRunnableContext;
-import org.testng.eclipse.ui.conversion.JUnitConverterQuickAssistProcessor;
-import org.testng.eclipse.ui.conversion.JUnitVisitor;
+import com.alexbchr.testutilities.testng.launch.components.Filters.ITypeFilter;
+import com.alexbchr.testutilities.testng.refactoring.FindTestsRunnableContext;
+import com.alexbchr.testutilities.testng.ui.conversion.JUnitConverterQuickAssistProcessor;
+import com.alexbchr.testutilities.testng.ui.conversion.JUnitVisitor;
 
 public class Utils {
   /**

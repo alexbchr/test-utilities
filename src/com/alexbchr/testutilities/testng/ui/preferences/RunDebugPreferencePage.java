@@ -5,8 +5,8 @@ import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.TestNGPluginConstants;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.TestNGPluginConstants;
 
 public class RunDebugPreferencePage extends FieldEditorPreferencePage
     implements IWorkbenchPreferencePage {
@@ -14,7 +14,7 @@ public class RunDebugPreferencePage extends FieldEditorPreferencePage
   private StringFieldEditor m_jvmArgs;
 
   public RunDebugPreferencePage() {
-    setPreferenceStore(TestNGPlugin.getDefault().getPreferenceStore());
+    setPreferenceStore(TestUtilitiesPlugin.getDefault().getPreferenceStore());
     setDescription("TestNG Run/Debug preferences");
   }
 

@@ -16,9 +16,9 @@ import org.eclipse.jdt.ui.text.java.IInvocationContext;
 import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
 import org.eclipse.jdt.ui.text.java.IProblemLocation;
 import org.eclipse.jdt.ui.text.java.IQuickAssistProcessor;
-import org.testng.eclipse.ui.conversion.BaseQuickAssistProcessor;
-import org.testng.eclipse.ui.conversion.IRewriteProvider;
-import org.testng.eclipse.ui.conversion.JUnitRewriteCorrectionProposal;
+import com.alexbchr.testutilities.testng.ui.conversion.BaseQuickAssistProcessor;
+import com.alexbchr.testutilities.testng.ui.conversion.IRewriteProvider;
+import com.alexbchr.testutilities.testng.ui.conversion.JUnitRewriteCorrectionProposal;
 
 /**
  * The assist processor that presents all the TestNG related code assists.

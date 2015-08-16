@@ -10,8 +10,8 @@
  *******************************************************************************/
 package com.alexbchr.testutilities.testng.ui;
 
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 import org.eclipse.jface.action.Action;
 
@@ -21,9 +21,9 @@ class ShowPreviousFailureAction extends Action {
 
 	public ShowPreviousFailureAction(TestRunnerViewPart part) {
 		super(ResourceUtil.getString("ShowPreviousFailureAction.label"));  //$NON-NLS-1$
-		setDisabledImageDescriptor(TestNGPlugin.getImageDescriptor("dlcl16/select_prev.gif")); //$NON-NLS-1$
-		setHoverImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/select_prev.gif")); //$NON-NLS-1$
-		setImageDescriptor(TestNGPlugin.getImageDescriptor("elcl16/select_prev.gif")); //$NON-NLS-1$
+		setDisabledImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("dlcl16/select_prev.gif")); //$NON-NLS-1$
+		setHoverImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/select_prev.gif")); //$NON-NLS-1$
+		setImageDescriptor(TestUtilitiesPlugin.getImageDescriptor("elcl16/select_prev.gif")); //$NON-NLS-1$
 		setToolTipText(ResourceUtil.getString("ShowPreviousFailureAction.tooltip"));  //$NON-NLS-1$
 		fPart= part;
 	}

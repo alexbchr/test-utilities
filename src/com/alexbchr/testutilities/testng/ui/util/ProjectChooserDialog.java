@@ -1,7 +1,7 @@
 package com.alexbchr.testutilities.testng.ui.util;
 
-import org.testng.eclipse.util.JDTUtil;
-import org.testng.eclipse.util.ResourceUtil;
+import com.alexbchr.testutilities.testng.util.JDTUtil;
+import com.alexbchr.testutilities.testng.util.ResourceUtil;
 
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.ui.JavaElementLabelProvider;

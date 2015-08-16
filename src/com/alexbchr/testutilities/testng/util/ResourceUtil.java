@@ -6,7 +6,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class ResourceUtil {
-	private static final String BUNDLE_NAME= "org.testng.eclipse.TestNGMessages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME= "com.alexbchr.testutilities.testng.TestNGMessages"; //$NON-NLS-1$
 
 	private static final ResourceBundle RESOURCE_BUNDLE= ResourceBundle.getBundle(BUNDLE_NAME);
 

@@ -2,8 +2,8 @@ package com.alexbchr.testutilities.testng.launch.tester;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.testng.eclipse.TestNGPlugin;
-import org.testng.eclipse.util.SuiteFileValidator;
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
+import com.alexbchr.testutilities.testng.util.SuiteFileValidator;
 
 
 /**
@@ -24,7 +24,7 @@ public class FileExtender {
       return SuiteFileValidator.isSuiteDefinition((IFile) receiver, xmlOnly);
     }
     catch(CoreException ce) {
-      TestNGPlugin.log(ce);
+      TestUtilitiesPlugin.log(ce);
     }
 
     return false;
