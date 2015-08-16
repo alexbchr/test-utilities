@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+	
+
 	<!-- START JUnit -->
-	<extension
+	<!--<extension
          point="org.eclipse.ui.newWizards">
       <category
       		id="com.alexbchr.testutilities.ui.TestWizardCategory"

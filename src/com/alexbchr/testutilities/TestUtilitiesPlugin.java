@@ -22,6 +22,7 @@ public class TestUtilitiesPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static TestUtilitiesPlugin plugin;
 	
+	
 	/**
 	 * The constructor
 	 */
@@ -75,35 +76,5 @@ public class TestUtilitiesPlugin extends AbstractUIPlugin {
 	 */
 	public static TestUtilitiesPlugin getDefault() {
 		return plugin;
-	}
-	
-	public static IWorkbenchPage getActivePage() {
-		IWorkbenchWindow activeWorkbenchWindow= getActiveWorkbenchWindow();
-		if (activeWorkbenchWindow == null)
-			return null;
-		return activeWorkbenchWindow.getActivePage();
-	}
-
-	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
-	 * @return the image descriptor
-	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
-		return imageDescriptorFromPlugin(PLUGIN_ID, path);
-	}
-	
-	public static String getPluginId() {
-		return PLUGIN_ID;
-	}
-	
-	public static void log(Throwable e) {
-		log(new Status(IStatus.ERROR, getPluginId(), IStatus.ERROR, "Error", e)); //$NON-NLS-1$
-	}
-
-	public static void log(IStatus status) {
-		getDefault().getLog().log(status);
 	}
 }
