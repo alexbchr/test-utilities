@@ -34,8 +34,10 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+
 import com.alexbchr.testutilities.testng.launch.components.Filters.ITypeFilter;
 import com.alexbchr.testutilities.testng.refactoring.FindTestsRunnableContext;
+import com.alexbchr.testutilities.testng.refactoring.TestNGVisitor;
 import com.alexbchr.testutilities.testng.ui.conversion.JUnitConverterQuickAssistProcessor;
 import com.alexbchr.testutilities.testng.ui.conversion.JUnitVisitor;
 
@@ -43,20 +45,20 @@ public class Utils {
   /**
    * A filter that will keep types that need to be converted to TestNG.
    */
-  public static final ITypeFilter CONVERSION_FILTER = new ITypeFilter() {
-
-    public boolean accept(IType type) {
-      IResource resource = type.getResource();
-      ICompilationUnit cu = JDTUtil.getJavaElement((IFile) resource);
-      CompilationUnit astRoot = JUnitConverterQuickAssistProcessor.createCompilationUnit(cu);
-      JUnitVisitor visitor = new JUnitVisitor();
-      astRoot.accept(visitor);
-
-      return visitor.needsConversion();
-    }
-
-  };
-  
+	public static final ITypeFilter CONVERSION_FILTER = new ITypeFilter() {
+		
+		@Override
+		public boolean accept(IType type) {
+			IResource resource = type.getResource();
+		    ICompilationUnit cu = JDTUtil.getJavaElement((IFile) resource);
+		    CompilationUnit astRoot = JUnitConverterQuickAssistProcessor.createCompilationUnit(cu);
+		    JUnitVisitor visitor = new JUnitVisitor();
+		    astRoot.accept(visitor);
+		
+		    return visitor.needsConversion();
+		}
+	};
+	
   public static final ITypeFilter CONVERSION_WITHOUT_TESTNG_FILTER = new ITypeFilter() {
 	
 	@Override

@@ -11,9 +11,14 @@ import org.eclipse.ui.IWorkbenchPage;
 public class ConvertFromJUnitRefactoring extends Refactoring {
   private RefactoringStatus m_status = new RefactoringStatus();
   private IWorkbenchPage m_page;
+  private Change m_manualCacheChange;
 
   public ConvertFromJUnitRefactoring(IWorkbenchPage page, RefactoringStatus status) {
     m_page = page;
+  }
+  
+  public void setManualCacheChange(Change change) {
+	  m_manualCacheChange = change;
   }
 
   @Override
@@ -37,7 +42,13 @@ public class ConvertFromJUnitRefactoring extends Refactoring {
   public Change createChange(IProgressMonitor pm) throws CoreException,
       OperationCanceledException
   {
-    return new ConvertFromJUnitCompositeChange(pm, m_page);
+	  if (m_manualCacheChange == null) {
+		  return new ConvertFromJUnitCompositeChange(pm, m_page);
+	  }
+	  else {
+		  pm.done();
+		  return m_manualCacheChange;
+	  }
   }
 
 }

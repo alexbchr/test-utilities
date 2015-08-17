@@ -2,6 +2,7 @@ package com.alexbchr.testutilities.testng.refactoring;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
@@ -11,6 +12,9 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.ltk.core.refactoring.Change;
+import org.eclipse.ltk.core.refactoring.CompositeChange;
+import org.eclipse.ltk.core.refactoring.TextFileChange;
 import org.eclipse.ltk.ui.refactoring.UserInputWizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -52,7 +56,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private XmlSuite m_xmlSuite;
   private Text m_suiteText;
   private Text m_testText;
-  private ConvertFromJUnitCompositeChange m_acceptedChange;
+  private Change m_change;
 
   private final ModifyListener MODIFY_LISTENER = new ModifyListener() {
     public void modifyText(ModifyEvent e) {
@@ -297,6 +301,14 @@ public class TestNGXmlPage extends UserInputWizardPage {
 
     setControl(control);
   }
+  
+  public void setChange(Change change) {
+	  m_change = change;
+  }
+  
+  public Change getChange() {
+  	return m_change;
+  }
 
   private void createModel() {
     //
@@ -318,6 +330,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
         packageSet.add(packageName);
       }
     }
+    
 //    for (JavaElement element : m_selectedElements) {
 //      if (element.getClassName() != null) {
 //        XmlClass c = new XmlClass(element.getPackageName() + "." + element.getClassName(),
@@ -360,15 +373,49 @@ public class TestNGXmlPage extends UserInputWizardPage {
   
   private void updateXmlSuite(XmlSuite suite) {
     p("Updating XML suite");
-    XmlTest test = suite.getTests().get(0);
-    test.getXmlClasses().clear();
-    test.getXmlPackages().clear();
-    if (m_selectionCombo.getSelectionIndex() == 0) {
-      test.getXmlClasses().addAll(m_classes);
-    } else {
-      test.getXmlPackages().addAll(m_packages);
+    XmlTest testTestNG = suite.getTests().get(0);
+    //Remove existing classes and packages nodes
+    testTestNG.getXmlClasses().clear();
+    testTestNG.getXmlPackages().clear();
+    if (m_selectionCombo.getSelectionIndex() == 0) { //Grouping by classes
+    	testTestNG.getXmlClasses().addAll(m_classes);
+    } else { //Grouping by packages
+    	testTestNG.getXmlPackages().addAll(m_packages);
     }
     p("Done updating XML suite");
+    
+    //TODO: REMOVE
+    getAboutToBeConvertedClasses();
+  }
+  
+  private Set<String> getAboutToBeConvertedClasses() {
+	  Set<String> classes = Sets.newHashSet();
+	  if (m_change != null && m_change instanceof CompositeChange) {
+		  CompositeChange compChange = (CompositeChange)m_change;
+		
+		  if (compChange.getChildren() != null && 
+				compChange.getChildren().length > 0 && 
+				compChange.getChildren()[0] instanceof ConvertFromJUnitCompositeChange) {
+			
+			  ConvertFromJUnitCompositeChange change = (ConvertFromJUnitCompositeChange)compChange.getChildren()[0];
+			  Map<String, String> mapPaths = change.getTypeFileNameMap();
+
+			  for (Change cTop : change.getChildren()) {
+				  if (cTop instanceof SourceFolderChange) {
+					  for (Change c : ((SourceFolderChange) cTop).getChildren()) {
+						  if (c instanceof TextFileChange) {
+							  String className = mapPaths.get(((TextFileChange) c).getFile().getFullPath().toOSString());
+				  				if (className != null && c.isEnabled()) {
+				  					classes.add(className);
+				  				}
+						  }
+					  }
+				  }
+			  }
+		  }
+	  }
+	  
+	  return classes;
   }
 
   private Text addTextLabel(Composite parent, String text) {
@@ -378,10 +425,6 @@ public class TestNGXmlPage extends UserInputWizardPage {
     result.setLayoutData(gd);
 
     return result;
-  }
-  
-  public void setAcceptedChange(ConvertFromJUnitCompositeChange change) {
-	  m_acceptedChange = change;
   }
 
   /**

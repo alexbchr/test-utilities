@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.ltk.core.refactoring.CompositeChange;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ui.IWorkbenchPage;
+
 import com.alexbchr.testutilities.TestUtilitiesPlugin;
 import com.alexbchr.testutilities.testng.util.JDTUtil;
 import com.alexbchr.testutilities.testng.util.Utils;
@@ -40,6 +41,7 @@ public class ConvertFromJUnitCompositeChange extends CompositeChange {
    * once per file.
    */
   private Map<String, Set<IResource>> m_classes = Maps.newHashMap();
+  private Map<String, String> m_classesPaths = Maps.newHashMap();
 
   public ConvertFromJUnitCompositeChange(IProgressMonitor pm, IWorkbenchPage page) {
     super("Composite change");
@@ -48,8 +50,14 @@ public class ConvertFromJUnitCompositeChange extends CompositeChange {
     markAsSynthetic();
     computeChanges();
   }
+  
+  public Map<String, String> getTypeFileNameMap() {
+	  return m_classesPaths;
+  }
 
   private void computeChanges() {
+	  m_classesPaths = Maps.newHashMap();
+	  
     TestUtilitiesPlugin.asyncExec(new Runnable() {
       public void run() {
         IJavaProject javaProject = JDTUtil.getJavaProjectContext();
@@ -62,6 +70,9 @@ public class ConvertFromJUnitCompositeChange extends CompositeChange {
             String sourceFolder = entry.getPath().toOSString();
             IResource resource = type.getResource();
             if (resource.getFullPath().toOSString().contains(sourceFolder)) {
+                m_classesPaths.put(
+                		resource.getFullPath().toOSString(),
+                		/*package*/type.getPackageFragment().getElementName() + "." + /*class*/type.getElementName());
               Set<IResource> l = m_classes.get(sourceFolder);
               if (l == null) {
                 l = Sets.newHashSet();
