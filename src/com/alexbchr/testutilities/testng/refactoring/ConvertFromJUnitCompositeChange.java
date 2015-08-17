@@ -55,7 +55,7 @@ public class ConvertFromJUnitCompositeChange extends CompositeChange {
         IJavaProject javaProject = JDTUtil.getJavaProjectContext();
         if (javaProject == null) return;
 
-        List<IType> types = Utils.findSelectedTypes(m_page, Utils.CONVERSION_FILTER);
+        List<IType> types = Utils.findSelectedTypes(m_page, Utils.CONVERSION_WITHOUT_TESTNG_FILTER);
         m_pm.beginTask("Finding test classes", types.size());
         for (IType type : types) {
           for (IClasspathEntry entry : Utils.getSourceFolders(javaProject)) {

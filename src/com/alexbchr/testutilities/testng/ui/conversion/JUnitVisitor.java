@@ -52,6 +52,9 @@ public class JUnitVisitor extends Visitor {
   private List<MethodDeclaration> m_beforeClasses = Lists.newArrayList();
   private List<MethodDeclaration> m_afterClasses = Lists.newArrayList();
   private MethodDeclaration m_suite = null;
+  
+  // If we keep TestNG classes in the output
+  private boolean m_keepTestNGClasses = true;
 
   // Parent classes
   private SimpleType m_testCase = null;
@@ -96,6 +99,14 @@ public class JUnitVisitor extends Visitor {
     }
     // Also add a few methods from the JUnit4 Assert class
     m_assertMethods.add("assertArrayEquals");
+  }
+  
+  public JUnitVisitor() {
+	  
+  }
+  
+  public JUnitVisitor(boolean keepTestNG) {
+	  m_keepTestNGClasses = keepTestNG;
   }
 
   @Override
@@ -178,7 +189,8 @@ public class JUnitVisitor extends Visitor {
       } else if (methodName.startsWith("_test") || (methodName.startsWith("test") && isPrivate)) {
         m_disabledTestMethods.add(md);
       }
-    }  else if (hasAnnotation(md, "Test")) {
+      //Added fully qualified name not to detect test attributes from TestNG
+    }  else if (hasAnnotation(md, "Test") && (m_keepTestNGClasses || !hasAnnotationFromFullyQualifiedName(md, "org.testng.annotations.Test"))) {
       m_hasTestMethods = true;  // to make sure we import org.testng.annotations.Test
       MemberValuePair mvp = getAttribute(md, "expected");
       if (mvp != null) {

@@ -56,6 +56,20 @@ public class Utils {
     }
 
   };
+  
+  public static final ITypeFilter CONVERSION_WITHOUT_TESTNG_FILTER = new ITypeFilter() {
+	
+	@Override
+	public boolean accept(IType type) {
+		IResource resource = type.getResource();
+	    ICompilationUnit cu = JDTUtil.getJavaElement((IFile) resource);
+	    CompilationUnit astRoot = JUnitConverterQuickAssistProcessor.createCompilationUnit(cu);
+	    JUnitVisitor visitor = new JUnitVisitor(false);
+	    astRoot.accept(visitor);
+	
+	    return visitor.needsConversion();
+	}
+};
 
   public static class JavaElement {
     public IJavaProject m_project;

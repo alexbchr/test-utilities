@@ -27,11 +27,13 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+
 import com.alexbchr.testutilities.TestUtilitiesPlugin;
 import com.alexbchr.testutilities.testng.util.PreferenceStoreUtil.SuiteMethodTreatment;
 import com.alexbchr.testutilities.testng.util.SWTUtil;
 import com.alexbchr.testutilities.testng.util.Utils;
 import com.alexbchr.testutilities.testng.util.Utils.JavaElement;
+
 import org.testng.xml.XmlClass;
 import org.testng.xml.XmlPackage;
 import org.testng.xml.XmlSuite;
@@ -50,6 +52,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private XmlSuite m_xmlSuite;
   private Text m_suiteText;
   private Text m_testText;
+  private ConvertFromJUnitCompositeChange m_acceptedChange;
 
   private final ModifyListener MODIFY_LISTENER = new ModifyListener() {
     public void modifyText(ModifyEvent e) {
@@ -375,6 +378,10 @@ public class TestNGXmlPage extends UserInputWizardPage {
     result.setLayoutData(gd);
 
     return result;
+  }
+  
+  public void setAcceptedChange(ConvertFromJUnitCompositeChange change) {
+	  m_acceptedChange = change;
   }
 
   /**
