@@ -62,6 +62,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private Change m_change;
   private Pattern m_pckPattern = Pattern.compile("^(.+)\\..+$");
   private boolean m_isFirstTimeVisible = true;
+  private boolean m_executingExistingJUnitTests = true;
 
   private final ModifyListener MODIFY_LISTENER = new ModifyListener() {
     public void modifyText(ModifyEvent e) {
@@ -96,6 +97,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private Set<XmlPackage> m_packages = Sets.newHashSet();
   private Text m_xmlFile;
   private Button m_generateBox;
+  private Button m_executeJUnitTests;
   private Combo m_parallelCombo;
   private Text m_threadCountText;
 
@@ -192,7 +194,6 @@ public class TestNGXmlPage extends UserInputWizardPage {
     }
 
     m_generateBox.addSelectionListener(new SelectionListener() {
-
       public void widgetSelected(SelectionEvent e) {
         group.setEnabled(((Button) e.getSource()).getSelection());
       }
@@ -204,6 +205,27 @@ public class TestNGXmlPage extends UserInputWizardPage {
 
     Composite parent = SWTUtil.createGridContainer(group, 3);
     parent.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    
+    //
+    // "Execute existing JUnit tests" box
+    //
+    m_executeJUnitTests = new Button(parent, SWT.CHECK);
+    m_executeJUnitTests.setText("Execute existing JUnit tests");
+    m_executeJUnitTests.setSelection(m_executingExistingJUnitTests);
+    
+    m_executeJUnitTests.addSelectionListener(new SelectionListener() {
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			updateUi(true);
+		}
+		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+		}
+	});
+    
+    GridData executeJUnitTestsLayoutData = new GridData();
+    executeJUnitTestsLayoutData.horizontalSpan = 3;
+    m_executeJUnitTests.setLayoutData(executeJUnitTestsLayoutData);
 
     //
     // Location
@@ -409,16 +431,16 @@ public class TestNGXmlPage extends UserInputWizardPage {
     	jUnitTest = suite.getTests().get(1);
     }
     
-    if (jUnitTest == null && jUnitClasses.size() > 0) {
+    if (jUnitTest == null && jUnitClasses.size() > 0 && isExecuteExistingJUnitTestsChecked()) {
 		jUnitTest = new XmlTest(suite, 1);
 		jUnitTest.setName("JUnit Tests");
 		jUnitTest.setJunit(true);
 	}
-    else if (jUnitTest != null && jUnitClasses.size() == 0) {
+    else if (jUnitTest != null && (jUnitClasses.size() == 0 || !isExecuteExistingJUnitTestsChecked())) {
     	suite.getTests().remove(jUnitTest);
     	jUnitTest = null;
     }
-    else if (jUnitTest != null) {
+    else if (jUnitTest != null && isExecuteExistingJUnitTestsChecked()) {
     	jUnitTest.getXmlClasses().clear();
     	jUnitTest.getXmlPackages().clear();
     }
@@ -434,10 +456,12 @@ public class TestNGXmlPage extends UserInputWizardPage {
         	
         	testTestNG.getXmlClasses().addAll(testNgClasses);
         	
-        	List<XmlClass> jUnitXmlClasses = jUnitTest.getXmlClasses();
-        	
-        	for (String str : jUnitClasses) {
-        		jUnitXmlClasses.add(new XmlClass(str, false));
+        	if (isExecuteExistingJUnitTestsChecked()) {
+        		List<XmlClass> jUnitXmlClasses = jUnitTest.getXmlClasses();
+            	
+            	for (String str : jUnitClasses) {
+            		jUnitXmlClasses.add(new XmlClass(str, false));
+            	}
         	}
     	}
     	else {
@@ -453,7 +477,10 @@ public class TestNGXmlPage extends UserInputWizardPage {
     		}
     		
     		testTestNG.getXmlPackages().addAll(getXmlPackagesForClasses(testNgClasses));
-    		jUnitTest.getXmlPackages().addAll(getXmlPackagesForClasses(jUnitClasses));
+    		
+    		if (isExecuteExistingJUnitTestsChecked()) {
+    			jUnitTest.getXmlPackages().addAll(getXmlPackagesForClasses(jUnitClasses));
+    		}
     	}
     	else {
     		testTestNG.getXmlPackages().addAll(m_packages);
@@ -531,6 +558,10 @@ public class TestNGXmlPage extends UserInputWizardPage {
    */
   public boolean generateXmlFile() {
     return m_generateBox.getSelection();
+  }
+  
+  public boolean isExecuteExistingJUnitTestsChecked() {
+	  return m_executeJUnitTests.getSelection();
   }
 
   public void saveXmlFile() {
