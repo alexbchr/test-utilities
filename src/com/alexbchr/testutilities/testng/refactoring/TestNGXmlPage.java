@@ -1,9 +1,12 @@
 package com.alexbchr.testutilities.testng.refactoring;
 
 import java.io.ByteArrayInputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.common.collect.Sets;
 
@@ -57,10 +60,18 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private Text m_suiteText;
   private Text m_testText;
   private Change m_change;
+  private Pattern m_pckPattern = Pattern.compile("^(.+)\\..+$");
+  private boolean m_isFirstTimeVisible = true;
 
   private final ModifyListener MODIFY_LISTENER = new ModifyListener() {
     public void modifyText(ModifyEvent e) {
-      updateUi();
+      updateUi(false);
+    }
+  };
+  
+  private final ModifyListener MODIFY_LISTENER_UPDATE_TEST_SUITE_WITH_TESTS = new ModifyListener() {
+    public void modifyText(ModifyEvent e) {
+      updateUi(true);
     }
   };
 
@@ -103,7 +114,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
     p("createModel");
     createModel();
     p("updateUI");
-    updateUi();
+    updateUi(false);
     p("addListeners");
     addListeners();
   }
@@ -117,7 +128,7 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private void addListeners() {
     m_suiteText.addModifyListener(MODIFY_LISTENER);
     m_testText.addModifyListener(MODIFY_LISTENER);
-    m_selectionCombo.addModifyListener(MODIFY_LISTENER);
+    m_selectionCombo.addModifyListener(MODIFY_LISTENER_UPDATE_TEST_SUITE_WITH_TESTS);
     m_parallelCombo.addModifyListener(MODIFY_LISTENER);
     m_threadCountText.addModifyListener(MODIFY_LISTENER);
   }
@@ -129,8 +140,20 @@ public class TestNGXmlPage extends UserInputWizardPage {
   private String getDefaultTestName() {
     return "Test";
   }
+  
+  @Override
+  public void setVisible(boolean visible) {
+	  if (visible && !m_isFirstTimeVisible) {
+		  updateUi(true);
+	  }
+	  else if (visible) {
+		  m_isFirstTimeVisible = false;
+	  }
+	  
+	  super.setVisible(visible);
+  }
 
-  private void updateUi() {
+  private void updateUi(boolean updateTests) {
     m_xmlSuite.setName(m_suiteText.getText());
     m_xmlSuite.getTests().get(0).setName(m_testText.getText());
     m_xmlSuite.setParallel(m_parallelCombo.getItem(m_parallelCombo.getSelectionIndex()));
@@ -141,7 +164,9 @@ public class TestNGXmlPage extends UserInputWizardPage {
     } catch(NumberFormatException ex) {
       m_xmlSuite.setThreadCount(XmlSuite.DEFAULT_THREAD_COUNT);
     }
-    updateXmlSuite(m_xmlSuite);
+    if (updateTests) {
+    	updateXmlSuite(m_xmlSuite);
+    }
     m_previewText.setText(m_xmlSuite.toXml());
   }
 
@@ -373,23 +398,74 @@ public class TestNGXmlPage extends UserInputWizardPage {
   
   private void updateXmlSuite(XmlSuite suite) {
     p("Updating XML suite");
+    Set<String> jUnitClasses = getJUnitClassesNotMigrating();
     XmlTest testTestNG = suite.getTests().get(0);
+    XmlTest jUnitTest = null;
     //Remove existing classes and packages nodes
     testTestNG.getXmlClasses().clear();
     testTestNG.getXmlPackages().clear();
+    
+    if (suite.getTests().size() > 1) {
+    	jUnitTest = suite.getTests().get(1);
+    }
+    
+    if (jUnitTest == null && jUnitClasses.size() > 0) {
+		jUnitTest = new XmlTest(suite, 1);
+		jUnitTest.setName("JUnit Tests");
+		jUnitTest.setJunit(true);
+	}
+    else if (jUnitTest != null && jUnitClasses.size() == 0) {
+    	suite.getTests().remove(jUnitTest);
+    	jUnitTest = null;
+    }
+    else if (jUnitTest != null) {
+    	jUnitTest.getXmlClasses().clear();
+    	jUnitTest.getXmlPackages().clear();
+    }
+    
     if (m_selectionCombo.getSelectionIndex() == 0) { //Grouping by classes
-    	testTestNG.getXmlClasses().addAll(m_classes);
+    	if (jUnitClasses.size() > 0) {
+    		Set<XmlClass> testNgClasses = Sets.newHashSet();
+        	for (XmlClass c : m_classes) {
+        		if (!jUnitClasses.contains(c.getName())) {
+        			testNgClasses.add(c);
+        		}
+        	}
+        	
+        	testTestNG.getXmlClasses().addAll(testNgClasses);
+        	
+        	List<XmlClass> jUnitXmlClasses = jUnitTest.getXmlClasses();
+        	
+        	for (String str : jUnitClasses) {
+        		jUnitXmlClasses.add(new XmlClass(str, false));
+        	}
+    	}
+    	else {
+    		testTestNG.getXmlClasses().addAll(m_classes);
+    	}
     } else { //Grouping by packages
-    	testTestNG.getXmlPackages().addAll(m_packages);
+    	if (jUnitClasses.size() > 0) {
+    		Set<String> testNgClasses = Sets.newHashSet();
+    		for (XmlClass c : m_classes) {
+    			if (!jUnitClasses.contains(c.getName())) {
+    				testNgClasses.add(c.getName());
+    			}
+    		}
+    		
+    		testTestNG.getXmlPackages().addAll(getXmlPackagesForClasses(testNgClasses));
+    		jUnitTest.getXmlPackages().addAll(getXmlPackagesForClasses(jUnitClasses));
+    	}
+    	else {
+    		testTestNG.getXmlPackages().addAll(m_packages);
+    	}
     }
     p("Done updating XML suite");
-    
-    //TODO: REMOVE
-    getAboutToBeConvertedClasses();
   }
   
-  private Set<String> getAboutToBeConvertedClasses() {
+  private Set<String> getJUnitClassesNotMigrating() {
 	  Set<String> classes = Sets.newHashSet();
+	  boolean validChanges = false;
+	  
 	  if (m_change != null && m_change instanceof CompositeChange) {
 		  CompositeChange compChange = (CompositeChange)m_change;
 		
@@ -404,8 +480,9 @@ public class TestNGXmlPage extends UserInputWizardPage {
 				  if (cTop instanceof SourceFolderChange) {
 					  for (Change c : ((SourceFolderChange) cTop).getChildren()) {
 						  if (c instanceof TextFileChange) {
+							  validChanges = true;
 							  String className = mapPaths.get(((TextFileChange) c).getFile().getFullPath().toOSString());
-				  				if (className != null && c.isEnabled()) {
+				  				if (className != null && !c.isEnabled()) {
 				  					classes.add(className);
 				  				}
 						  }
@@ -415,7 +492,29 @@ public class TestNGXmlPage extends UserInputWizardPage {
 		  }
 	  }
 	  
+	  if (!validChanges) {
+		  List<IType> types = Utils.findTypes(Utils.getSelectedJavaElements(), Utils.CONVERSION_WITHOUT_TESTNG_FILTER);
+		  for (IType type : types) {
+			  classes.add(type.getFullyQualifiedName());
+		  }
+	  }
+	  
 	  return classes;
+  }
+  
+  private Set<XmlPackage> getXmlPackagesForClasses(Set<String> classes) {
+	  Set<XmlPackage> packages = Sets.newHashSet();
+	  String packageName;
+	  Matcher matcher;
+	  
+	  for (String str : classes) {
+		  matcher = m_pckPattern.matcher(str);
+		  if (matcher.find()) {
+			  packages.add(new XmlPackage(matcher.group(1)));
+		  }
+	  }
+	  
+	  return packages;
   }
 
   private Text addTextLabel(Composite parent, String text) {
