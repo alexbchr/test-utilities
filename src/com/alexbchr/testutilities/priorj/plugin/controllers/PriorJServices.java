@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.controllers;
+package com.alexbchr.testutilities.priorj.plugin.controllers;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -14,23 +14,28 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PartInitException;
 
-import report.GenerateTreeData;
-import technique.EmptySetOfTestCaseException;
-import technique.Technique;
-import technique.TechniqueCreator;
+import com.alexbchr.testutilities.priorj.report.GenerateTreeData;
+import com.alexbchr.testutilities.priorj.technique.EmptySetOfTestCaseException;
+import com.alexbchr.testutilities.priorj.technique.Technique;
+import com.alexbchr.testutilities.priorj.technique.TechniqueCreator;
 
-import com.alexbchr.testutilities.priorj.controllers.PriorJServices;
-import com.alexbchr.testutilities.priorj.core.AJDTHandler;
-import com.alexbchr.testutilities.priorj.core.DifferenceVisitor;
-import com.alexbchr.testutilities.priorj.core.JUnitLaunch;
-import com.alexbchr.testutilities.priorj.core.JUnitReportFailures;
+import com.alexbchr.testutilities.priorj.plugin.core.AJDTHandler;
+import com.alexbchr.testutilities.priorj.plugin.core.DifferenceVisitor;
+import com.alexbchr.testutilities.priorj.plugin.core.JUnitLaunch;
+import com.alexbchr.testutilities.priorj.plugin.core.JUnitReportFailures;
 import com.java.io.JavaIO;
 
-import controller.DataManager;
-import controller.PriorJ;
+import com.alexbchr.testutilities.priorj.controller.DataManager;
+import com.alexbchr.testutilities.priorj.controller.PriorJ;
 import coverage.TestCase;
 import coverage.TestSuite;
 
+/**
+ * PriorJ Controller is an controller to plugin tasks.
+ * 
+ * @author Samuel T. C. Santos
+ *
+ */
 public class PriorJServices {
 	
 	private static PriorJServices instance;

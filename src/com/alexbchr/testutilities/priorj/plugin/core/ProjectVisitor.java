@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.core;
+package com.alexbchr.testutilities.priorj.plugin.core;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;

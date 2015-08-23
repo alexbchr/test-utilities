@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.core;
+package com.alexbchr.testutilities.priorj.plugin.core;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.models;
+package com.alexbchr.testutilities.priorj.plugin.models;
 
 import java.util.Calendar;
 import java.util.List;

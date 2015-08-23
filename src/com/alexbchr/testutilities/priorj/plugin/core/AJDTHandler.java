@@ -1,6 +1,7 @@
-package com.alexbchr.testutilities.priorj.core;
+package com.alexbchr.testutilities.priorj.plugin.core;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -44,8 +45,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
-import com.alexbchr.testutilities.priorj.core.PriorJBuilder;
-import com.alexbchr.testutilities.priorj.core.ProjectVisitor;
 import com.java.io.JavaIO;
 
 /**

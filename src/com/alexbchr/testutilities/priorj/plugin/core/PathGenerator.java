@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.core;
+package com.alexbchr.testutilities.priorj.plugin.core;
 
 import com.java.io.JavaIO;
 

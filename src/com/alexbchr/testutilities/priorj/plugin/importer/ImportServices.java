@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.importer;
+package com.alexbchr.testutilities.priorj.plugin.importer;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
-import com.alexbchr.testutilities.priorj.controllers.PriorJServices;
+import com.alexbchr.testutilities.priorj.plugin.controllers.PriorJServices;
 import com.java.io.JavaIO;
 
 /**

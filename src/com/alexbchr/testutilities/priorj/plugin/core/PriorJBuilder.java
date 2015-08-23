@@ -1,4 +1,4 @@
-package com.alexbchr.testutilities.priorj.core;
+package com.alexbchr.testutilities.priorj.plugin.core;
 
 import java.util.Map;
 
@@ -17,7 +17,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
  */
 public class PriorJBuilder extends IncrementalProjectBuilder {
 
-	public static final String ID = "com.alexbchr.testutilities.priorj.core.PriorJBuilder";
+	public static final String ID = "com.edu.ufcg.splab.priorj.PriorJBuilder";
 	
 	protected IProject[] build(int kind, Map<String, String> args, IProgressMonitor monitor) throws CoreException {
 		if (kind == FULL_BUILD){
