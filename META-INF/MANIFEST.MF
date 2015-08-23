@@ -28,7 +28,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.variables,
  org.junit,
  org.eclipse.ui.editors,
- org.eclipse.core.filesystem
+ org.eclipse.core.filesystem,
+ org.eclipse.equinox.registry,
+ org.eclipse.e4.ui.di,
+ org.aspectj.runtime;bundle-version="1.7.3",
+ org.eclipse.ajdt.ui;bundle-version="2.2.4",
+ org.eclipse.ajdt.core;bundle-version="2.2.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
