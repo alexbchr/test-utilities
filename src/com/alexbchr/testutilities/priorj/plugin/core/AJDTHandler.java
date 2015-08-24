@@ -1,7 +1,6 @@
 package com.alexbchr.testutilities.priorj.plugin.core;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -45,6 +44,7 @@ import org.osgi.framework.Bundle;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
+import com.alexbchr.testutilities.TestUtilitiesPlugin;
 import com.java.io.JavaIO;
 
 /**
@@ -55,7 +55,6 @@ import com.java.io.JavaIO;
  * @version 1.0.0
  */
 public class AJDTHandler {
-
 	private IWorkspace workspace;
 	private IWorkspaceRoot root;
 	/**
@@ -401,7 +400,7 @@ public class AJDTHandler {
 	 * com.splab.priorj.plugin_1.0.0.201405280013
 	 * 
 	 * PLUGIN ID
-	 * com.edu.ufcg.splab.priorj
+	 * com.alexbchr.testutilities.priorj
 	 * Development Bundle name
 	 * com.splab.priorj.plugin
 	 * 
@@ -411,7 +410,7 @@ public class AJDTHandler {
 	 */
 	public static void copyAspectFile(IFolder srcFolder) throws IOException, CoreException{
 		URL url;
-		Bundle bundle = Platform.getBundle("com.splab.priorj.plugin");
+		Bundle bundle = Platform.getBundle(TestUtilitiesPlugin.PLUGIN_ID);
 		url = bundle.getEntry("data/"+ASPECT_FILE);
 		IFile newFile = srcFolder.getFile(ASPECT_FILE);
 		InputStream fileStream = url.openConnection().getInputStream();
@@ -429,7 +428,7 @@ public class AJDTHandler {
 	 */
 	private void copyLibraries(IFolder libFolder) throws IOException, CoreException{
 		URL url;
-		Bundle bundle = Platform.getBundle("com.splab.priorj.plugin");
+		Bundle bundle = Platform.getBundle(TestUtilitiesPlugin.PLUGIN_ID);
 		url = bundle.getEntry("lib/"+coverageLibrary);
 		IFile newLib = libFolder.getFile(coverageLibrary);
 		InputStream fileStream = url.openConnection().getInputStream();
@@ -444,7 +443,7 @@ public class AJDTHandler {
 	 */
 	public void copyReportResourcesTo(IFolder reportFolder) throws IOException, CoreException {
 		URL url;
-		Bundle bundle = Platform.getBundle("com.splab.priorj.plugin");
+		Bundle bundle = Platform.getBundle(TestUtilitiesPlugin.PLUGIN_ID);
 		url = bundle.getEntry("data/report.zip");
 		IFile newFile = reportFolder.getFile("report.zip");
 		InputStream fileStream = url.openConnection().getInputStream();
@@ -683,7 +682,7 @@ public class AJDTHandler {
 	 * @param value
 	 */
 	public void saveInPreferences(String key, String value){
-		Preferences preferences = InstanceScope.INSTANCE.getNode("com.edu.ufcg.splab.priorj");
+		Preferences preferences = InstanceScope.INSTANCE.getNode("com.alexbchr.testutilities.priorj");
 		Preferences sub1 = preferences.node("node1");
 	    sub1.put(key, value);
         try {
@@ -700,7 +699,7 @@ public class AJDTHandler {
 	 * @return
 	 */
 	public String getFromPreferences(String key){
-		Preferences preferences = InstanceScope.INSTANCE.getNode("com.edu.ufcg.splab.priorj");
+		Preferences preferences = InstanceScope.INSTANCE.getNode("com.alexbchr.testutilities.priorj");
 	    Preferences sub1 = preferences.node("node1");
 	    return sub1.get(key, "default");
 	}

@@ -1,6 +1,253 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+	<!-- PriorJ UI START -->
+	<extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Prioritization"
+            id="com.alexbchr.testutilities.priorj.plugin.ui">
+      </category>
+      <view
+            name="Prioritization"
+            icon="icons/priorj/view.png"
+            category="com.alexbchr.testutilities.priorj.plugin.ui"
+            class="com.alexbchr.testutilities.priorj.plugin.ui.views.PrioritizationView"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.views.PrioritizationView">
+      </view>
+   </extension>
+   <extension
+         id="com.alexbchr.testutilities.priorj.plugin.ui.category"
+         name="PriorJUI"
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands Related with Prioritization UI"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.category"
+            name="PriorJUI">
+      </category>
+      <command
+            categoryId="com.alexbchr.testutilities.priorj.plugin.ui.category"
+            defaultHandler="com.alexbchr.testutilities.priorj.plugin.ui.handlers.OpenPrioritizationViewHandler"
+            description="Open the Prioritization view if it is not already visible"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.commands.openView"
+            name="Open Prioritization View">
+      </command>
+      <command
+            categoryId="com.alexbchr.testutilities.priorj.plugin.ui.category"
+            defaultHandler="com.alexbchr.testutilities.priorj.plugin.ui.handlers.OpenPrioritizationWizardHandler"
+            description="Creating a new Prioritization"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.commands.newPrioritization"
+            name="New Prioritization">
+      </command>
+      <command
+            defaultHandler="com.alexbchr.testutilities.priorj.plugin.ui.handlers.OpenInstrumentationWizardHandler"
+            description="Creating a New Instrumentation"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.commands.newInstrumentation"
+            name="New Instrumentation">
+      </command>
+      <command
+            defaultHandler="com.alexbchr.testutilities.priorj.plugin.ui.handlers.OpenConfigurePathWizardHandler"
+            description="Setting a Local to Save Prioritizations Artifacts"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.commands.configureLocalStorage"
+            name="Configure Local Storage">
+      </command>
+      <command
+            defaultHandler="com.alexbchr.testutilities.priorj.plugin.ui.handlers.OpenImportWizardHandler"
+            description="Importing suites generated"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.commands.openImportWizard"
+            name="Import Suites">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="true"
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="com.alexbchr.testutilities.priorj.plugin.ui.menus.priorJMenu"
+               label="PriorJ"
+               mnemonic="p">
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.openView"
+                  icon="icons/priorj/view.png"
+                  id="com.alexbchr.testutilities.priorj.plugin.ui.openPrioritizationView"
+                  mnemonic="o"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="true">
+                  <with
+                        variable="activeContexts">
+                  </with>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.newPrioritization"
+                  icon="icons/priorj/new.png"
+                  label="New Prioritization"
+                  mnemonic="n"
+                  style="push"
+                  tooltip="Creating a new Prioritization">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.newInstrumentation"
+                  icon="icons/priorj/inst.png"
+                  label="New Instrumentation"
+                  mnemonic="i"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.openImportWizard"
+                  icon="icons/priorj/in.gif"
+                  label="Import Suites"
+                  style="push">
+            </command>
+            <separator
+                  name="com.alexbchr.testutilities.priorj.plugin.ui.separator"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.configureLocalStorage"
+                  icon="icons/priorj/bd.png"
+                  label="Configure Local Base Path"
+                  mnemonic="b"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               id="com.alexbchr.testutilities.priorj.plugin.ui.menus.priorJMenuPopup"
+               label="PriorJ">
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.openView"
+                  icon="icons/priorj/view.png"
+                  label="Open Prioritization View"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.newPrioritization"
+                  icon="icons/priorj/new.png"
+                  label="New Prioritization"
+                  style="push"
+                  tooltip="Creating a new Prioritization">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.newInstrumentation"
+                  icon="icons/priorj/inst.png"
+                  label="New Instrumentation"
+                  mnemonic="i"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.openImportWizard"
+                  icon="icons/priorj/in.gif"
+                  label="Import Suites"
+                  style="push">
+            </command>
+            <separator
+                  name="com.splab.priorj.ui.separator"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.configureLocalStorage"
+                  icon="icons/priorj/bd.png"
+                  label="Configure Local Base Path"
+                  mnemonic="b"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="true"
+            locationURI="menu:file?after=additions">
+         <menu
+               label="PriorJ">
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.openView"
+                  icon="icons/priorj/view.png"
+                  label="Open Prioritization View"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.newPrioritization"
+                  icon="icons/priorj/new.png"
+                  label="New Prioritization"
+                  mnemonic="n"
+                  style="push"
+                  tooltip="Creating a new Prioritization">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.newInstrumentation"
+                  icon="icons/priorj/inst.png"
+                  label="New Instrumentation"
+                  mnemonic="i"
+                  style="push">
+            </command>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.openImportWizard"
+                  icon="icons/priorj/in.gif"
+                  label="Import Suites"
+                  style="push">
+            </command>
+            <separator
+                  name="com.alexbchr.testutilities.priorj.plugin.ui.separator"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="com.alexbchr.testutilities.priorj.plugin.ui.commands.configureLocalStorage"
+                  icon="icons/priorj/bd.png"
+                  label="Configure Local Base Path"
+                  mnemonic="b"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            class="com.alexbchr.testutilities.priorj.plugin.ui.wizards.NewWizardForInstrumentation"
+            icon="icons/priorj/inst.png"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.wizardInstrumentation"
+            name="New  Instrumentation">
+      </wizard>
+      <wizard
+            class="com.alexbchr.testutilities.priorj.plugin.ui.wizards.NewWizardForPrioritization"
+            icon="icons/priorj/view.png"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.wizardPrioritization"
+            name="New Prioritization">
+      </wizard>
+      <wizard
+            class="com.alexbchr.testutilities.priorj.plugin.ui.wizards.NewWizardForLocalStorage"
+            icon="icons/priorj/bd.png"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.wizardLocalStorage"
+            name="Configure Local Storage">
+      </wizard>
+      <wizard
+            class="com.alexbchr.testutilities.priorj.plugin.ui.wizards.NewWizardForImportation"
+            icon="icons/priorj/classes.gif"
+            id="com.alexbchr.testutilities.priorj.plugin.ui.wizardForImportation"
+            name="Import Suite">
+      </wizard>
+   </extension>
+	<!-- PriorJ UI END -->
+
+	<!-- PriorJ START -->
+	<extension id="PriorJBuilder"
+   		point="org.eclipse.core.resources.builders">
+   		<builder
+   		callOnEmptyDelta="false"
+   		hasNature="false"
+   		isConfigurable="false"
+   		supportsConfigurations="false">
+   			<run class="com.alexbchr.testutilities.priorj.plugin.core.PriorJBuilder" />
+		</builder>
+	</extension>
+	<!-- PriorJ END -->
+
+	<!-- TestNG START -->
    <extension-point id="testListenerContributorSchema" name="%testListenerContributor.name" schema="schema/testListenerContributorSchema.exsd"/>
    <extension-point id="reporterListenerContributorSchema" name="%reporterListenerContributor.name" schema="schema/reporterListenerContributorSchema.exsd"/>
 	
@@ -404,5 +651,6 @@ public void ${testName}() throws Exception {
        </pattern>
     </template>
  </extension>
+ <!-- TestNG END -->
 
 </plugin>
